@@ -1,0 +1,360 @@
+:root {
+    --gris: #ffffff73;
+    --peony: #F4C9D6;
+    --warm-fog: #F2F1ED;
+
+}
+
+
+ body {
+    background-color: var(--gris) !important;
+    color: #000000;
+    margin: 0;
+    padding: 0; 
+}
+
+
+#pantalla-alumnos {
+    background-color: #F6F4EE !important;
+    background-image: 
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,00,0.3) 1px, transparent 1px)
+    background-size 30px 30px ;
+}
+
+#pantalla-disciplinas {
+    background-color: var(--peony);
+}
+
+
+#parra1 {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  color: white;
+}
+
+#frase1 {
+ font-weight: 800;
+ font-size: 3rem;
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ line-height: 1.2;
+ font-weight: bold;
+}
+
+.cursive-text{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    color: var(--peony);
+}
+
+.img-hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1 ;
+
+.overlay-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+}
+.banner-recortado {
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+#foto1 {
+    width: 100vw;
+    height: 100%;
+   object-fit: cover;
+   object-position: center;
+}
+
+h3 {
+    color: var(--matcha);
+}
+
+
+#foto2 { 
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+    border-bottom: 15px;
+}
+
+.titulo1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #3E2723;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.titulo2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #3E2723;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.linea-matcha{
+    width: 80px;
+    height: 4px;
+    background-color: #838F58;
+}
+
+.linea-peony{
+     width: 80px;
+    height: 4px;
+    background-color: #F4C9D6;
+}
+
+.p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.lh-1 {
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.img-wrapper {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.text-muted { 
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.bg-write {
+    background-color: #ffffff;
+    border: 1px;
+    position: relative;
+    z-index: 2;
+}
+
+@media (min-width: 768px) {
+    .offset-md-1 {
+        margin-left: -8%;
+    
+    }
+}
+
+#foto3 {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    display: block;
+}
+
+.navbar-tranparent {
+    background-color: transparent;
+    transition: backgound-color 0.5s ease;
+}
+
+.nav-colored {
+    background-color: #000000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.5s ease;
+}
+
+.nav-colored .nav-link .nav-colored .navbar-brand {
+    color: #ffffff;
+}
+
+.overlay-oscuro {
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.overlay-text {
+    z-index: 2;
+}
+
+p, span, h2 {
+    color: #000000;
+    font-weight: 500;
+}
+
+#parradic {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+
+}
+
+#parracreec {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+
+}
+
+#seccion-precios {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    transform: none;
+}
+
+#seccion-precios .col-md-4 {
+       width: 33.33%;
+       min-width: 300px;
+}
+
+
+.card {
+    transform: none;
+    writing-mode: horizontal-tb;
+}
+
+
+.pb-5 {
+    padding-bottom: 3rem;
+}
+
+.video-hero {
+    height: 70vh;
+    width: 100%;
+}
+
+.video-bg {
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.aranceles {
+    display: grid ;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px ;
+    justify-content: center;
+    justify-items: center;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    margin-bottom: 60px;
+   
+}
+
+.aranceles .card {
+    font-family: "Montserrat", sans-serif;
+    background-color: #F4C9D6;
+    border: none;
+    border-radius: 25px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px;
+   
+}
+
+.aranceles .card h5 {
+    font-family: "Anton", sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.aranceles .card p strong {
+    font-family: "Anton", sans-serif;
+    display: block;
+    font-size: 3.8rem;
+    letter-spacing: 1px;
+    color: #000000;
+    line-height: 1;
+    margin-bottom: 15px;
+}
+
+.aranceles .card .card-text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #333333;
+    line-height: 1.5;
+}
+
+.col-md-5 form, .col-md-6 form {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.col-md-5 form:hover, .col-md-6 form:hover {
+    box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+    transform: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #ffffff;
+    border-color: #F4C9D6;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+}
+
+
+
+
+.fila-premium:hover .video-preview {
+    opacity: 1 !important;
+    filter: grayscale(0%) !important;
+    transform: scale(1.02) !important;
+}
+
+.fila-premium:hover .bloque-informacion {
+    background-color: #fefefb !important;
+}
+
+@media (max-width: 768px) {
+    .fila-premium {
+        flex-direction: column !important ;
+        height: auto;
+    }
+    .bloque-video {
+        width: 100% !important;
+        height: 250px !important;
+    }
+    .bloque-informacion {
+        padding: 30px 20px !important;
+    }
+}
