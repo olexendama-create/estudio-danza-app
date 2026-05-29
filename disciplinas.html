@@ -120,21 +120,16 @@
 </style>
 
 
-
-
-
-<body id="pantalla-disciplinas">
-    
-<nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top navbar-transparentpy-3" style="background-color: black;">
+  <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top py-3" style="background-color: #000;">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="#" style="color: #F4C9D6; letter-spacing: 1px;">Studio Gym Dance</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" style="color: #F2F1ED;" href="index.html">Inicio</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.html">Alumnos</a>
+        <a class="nav-link active" style="color: #F2F1ED;" href="inicio.html">Inicio</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas.html">Disciplinas y Horarios</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
         <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.html">Tienda</a>
@@ -143,45 +138,147 @@
   </div>
 </nav>
 
-<div class="container mt-5 pt-5 mb-5">
-    <div class="row align-items-center mb-5 bg-write border rounded shadow-sm overflow-hidden" style="height: 280px;">
-        <div class="col-md-6 p-4 ps-5">
-            <span class="text-muted text-uppercase small d-bloack mb-2" style="letter-spacing: 2px; font-size: 11px;">Urbano</span>
-            <h3 class="fw-normal mb-3" style="font-family: Playfair Display, serif; font-size: 28px;">Ritmos Urbanos</h3>
-            <div class="text-secondary" style="font-size: 14px;">
-                <p class="mb-1"><strong class="text-dark small text-uppercase" style="font-size: 11px;">Dias:</strong>Lunes y Miercoles</p>
-                <p class="mb-1"><strong class="text-dark small text-uppercase" style="font-size: 11px;">Horaio:</strong>18:30 a 19:30 hs</p>
-                <p class="fst-italic text-dark mt-3 mb-0">Prof. Mauro Gomez</p>
-            </div>
-        </div>
-        <div class="col-md-6 p-0 bg-dark position-relative" style="height: 280px;">
-            <video autoplay muted loop playsimline class="w-100 h-100" style="object-fit: cover; opacity: 0.85;">
-                <source src="" type="video-mp4">
-            </video>
-        </div>
-    </div>
+
+
+
+<body>
     
-    <div class="row align-items-center mb-5 bg-white border rounded shadow-sm overflow-hidden flex-md-row-reverse" style="height: 280px;">
-    <div class="col-md-6 p-4 ps-5">
-        <span class="text-muted text-uppercase samll d-block mb-1" style="letter-spacing: 2px; font-size: 11px;">Tecnica</span>
-        <h3 class="fw-normal mb-3" style="font: Playfair Display, serif; font-size: 28px;">Danza Clasica</h3>
-        <div class="text-secondary" style="font-size: 14px;">
-            <p class="mb-1"><strong class="text-dark small text-uppercase" style="font-size: 11px;">Dias:</strong>Martes y Jueves</p>
-            <p class="mb-1"><strong class="text-dark small text-uppercase" style="font-size: 11px;">Horario:</strong>17:00 a 18:30 hs</p>
-            <p class="fst-italic text-dark mt-3 mb-0">Prof. Elena Zaldivar</p>
-        </div>
+<section style="padding: 80px 60px; background: #f8f4ef;">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 50px; flex-wrap: nowrap;">
+
+  <div style="flex: 1; min-width: 35%;">
+    <p style="letter-spacing: 2px; text-transform: uppercase; color: #999;">Nuestras disciplinas</p>
+
+    <h1 style="font-size: 70px; font-weight: 900; line-height: 1; margin-bottom: 20px; font-family: Anton , sans-serif;">
+        MOVETE. <br>
+        EXPRESA.<br>
+        <span style="color: #e8b4d8;">
+            VIVI.
+        </span>
+    </h1>
+
+    <P style="font-size: 18px; color: #555; margin-bottom: 30px;">
+        Explora todas nuestras disciplinas,
+        horarios y profesores.
+    </P>
+
+    <button style="background: #e8b4d8; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
+        Ver horarios
+    </button>
     </div>
-         <div class="col-md-6 p-0 bg-dark position-relative" style="height: 280px;">
-           <video autoplay muted loop playsinline class="w-100 h-100" style="object-fit: cover; opacity: 0.85;">
-                <source src="" type="video-mp4">
-            </video>
-         </div>
+
+    <div style="flex: 1; min-width: 65%;">
+        <video width="100%" height="350" controls autoplay muted loop style="border-radius: 25px; object-fit: cover; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <source src="../Studio Gym Dance/videos e imagenes/v1c044g50000d7t7gpnog65p5kgt4fmg.mp4" type="video/mp4">
+        </video>
+    </div>
+  </div>
+</section>
+
+
+<section style="padding: 50px 60px; background: #f8f4ef;">
+    <h2 style="font-family: Anton , sans-serif ; font-size: 28px; margin-bottom: 25px; color: #111; text-transform: uppercase;">
+        DISCIPLINAS
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 22px;">
+
+    <div class="disciplina-card" style="background-image: ;">
+        <div class="disciplina-overlay">
+            <h3>Ritmos<br>Urbanos</h3>
+            <p>Lun y Mie 18:30 hs</p>
+            <span>--</span>
+        </div>
      </div>
 
- </div>
+      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <img src="../Studio Gym Dance/videos e imagenes/contemporaneo.PNG" style="width: 100%; height: 250px; object-fit: cover;">
+
+         <div style="padding: 20px;">
+            <h3>Contemporaneo</h3>
+            <p>
+                Juveniles <br>
+                Adultos
+            </p>
+        </div>
+     </div>
+
+    <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
+
+        <div style="padding: 20px;">
+            <h3>Urbano y Reggaeton</h3>
+            <p>
+                Kids <br>
+                Juveniles <br>
+                Adultos
+            </p>
+        </div>
+     </div>
+
+      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
+
+         <div style="padding: 20px;">
+            <h3>Femme y Heels</h3>
+            <p>
+                Tecnico Femme <br>
+                Heels Femme
+            </p>
+        </div>
+     </div>
+
+     <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
+
+         <div style="padding: 20px;">
+            <h3>Ritmos Latinos</h3>
+            <p>
+                Salsa <br>
+                Bachata <br>
+                Merengue
+            </p>
+        </div>
+     </div>
+
+     <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
+
+         <div style="padding: 20px;">
+            <h3>Arabe y Tap</h3>
+            <p>
+                Todos los niveles
+            </p>
+        </div>
+     </div>
+</div>
+</section>
 
 
 
+
+
+
+
+
+
+
+
+
+ <footer class="py-4 text-center" style="background-color: #F4C9D6; color: black;">
+  <P>Contacto y Redes Sociales</P>
+     <div class="social-icons">
+      <a href="" class="btn btn" style="color: black;">
+         <i class="bi bi-instagram"></i> Istragram
+     </a>
+     <a href="" class="btn btn" style="color:black;">
+      <i class="bi bi-whatsapp"></i> Whatsapp
+     </a>
+     </div>
+     <div class=" color black">
+       © 2026 Studio Gym Danza - Todos los derechos reservados
+     </div>
+</footer>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>

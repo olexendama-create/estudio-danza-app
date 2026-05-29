@@ -44,7 +44,7 @@
 <div class="container-fluid py-5" style="background-color: #f8f7f2 !important; background-image: radial-gradient(#e8e4d8 28%, transparent 28%) !important; background-size: 50px 50px !important; min-height: 100vh;">
     <div class="row g-5 my-5 justify-content-center">
         <div class="col-md-5">
-            <form class="bg-white p-4 p-md-5 border border-dark shadow-sm h-100">
+            <form  action="login.php" method="POST" class="bg-white p-4 p-md-5 border border-dark shadow-sm h-100">
                <fieldset>
                 <legend class="fw-bold text-uppercase mb-4" style="font-family: Anton , sans-serif; font-size: 1.8rem; letter-spacing: 1px; color: #000; ">
                     Iniciar Sesion
@@ -53,12 +53,12 @@
 
                 <div class="mb-3">
                     <label for="LoginDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI</label>
-                    <input type="text" id="loginDni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family:  Montserrat, sans-serif;">
+                    <input type="text" id="loginDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family:  Montserrat, sans-serif;">
                 </div>
 
                 <div class="mb-4">
                     <label for="loginPassword" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Contraseña</label>
-                    <input type="password"  id="loginPassword" class="form-control rounded-0 border-dark p-3" placeholder="........" style="font-family:  Montserrat, sans-serif;">
+                    <input type="password"  id="loginPassword" name="password" class="form-control rounded-0 border-dark p-3" placeholder="........" style="font-family:  Montserrat, sans-serif;">
                 </div>
 
                 <div class="mb-4">
@@ -79,37 +79,95 @@
 
 
         <div class="col-md-6">
-            <form class="bg-white p-4 p-md-5 border border-dark shadow-sm h-100">
+            <form  action="registrar.php" method="POST" class="bg-white p-4 p-md-5 border border-dark shadow-sm h-100">
                 <fieldset>
                     <legend class="fw-bold text-uppercase mb-4" style="font-family: Anton , sans-serif; font-size: 1.8rem; letter-spacing: 1px; color: #000;">
                         Registrarme e inscribirme
                     </legend>
                     <hr style="border-top: 3px solid #F4C9D6; width: 60px; opacity: 1; margin-bottom: 25px;">
                    
-                    <div class="mb-3">
-                        <label for="regNombre" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Nombre y Apellido</label>
-                        <input type="text" id="regNombre" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                        <label for="regNombre" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Nombre</label>
+                        <input type="text" id="regNombre" name="nombre" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;"
+                        required>
+                       </div>
+                    
+                     <div class=" col-md-6 mb-3">
+                        <label for="regApe" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Apellido</label>
+                        <input type="text" id="regApellido" name="apellido" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;"
+                        required>
                     </div>
+                     </div>
 
                     <div class="mb-3">
                         <label for="regDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI</label>
-                        <input type="text" id="regDni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family: Montserrat, sans-serif;">
+                        <input type="text" id="regDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family: Montserrat, sans-serif;">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">
+                            Tipo de documento
+                        </label>
+                        <select name="id_tipo_documento"  class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">
+                            <option value="">Seleccionar</option>
+                            <option value="1">DNI</option>
+                            <option value="2">Pasaporte</option>
+                        </select>
+                    </div>
+
+                     <div class="mb-3">
+                        <label  class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Fecha de Nacimiento</label>
+                        <input type="date" id="regFch" name="fecha_nacimiento" class="form-control rounded-0 border-dark p-3" style="font-family: Montserrat, sans-serif;"
+                        required
+                        >
+                    </div>
+
+                    <div class="row">
+                         <div class=" col-md-6 mb-3">
+                        <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Telefono</label>
+                        <input type="tel" id="regTel" name="telefono" class="form-control rounded-0 border-dark p-3" placeholder="Tu telefono" style="font-family: Montserrat, sans-serif;"
+                        required
+                        >
                     </div>
                     
-                    <div class="mb-3">
+                    <div class=" col-md-6 mb-3">
                         <label for="regEmail" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Correo Electronico (Gmail)</label>
-                        <input type="email" id="regEmail" class="form-control rounded-0 border-dark p-3" placeholder="ejemplo@gmail.com" required style="font-family: Montserrat, sans-serif;">
+                        <input type="email" id="regEmail" name="email" class="form-control rounded-0 border-dark p-3" placeholder="ejemplo@gmail.com" required style="font-family: Montserrat, sans-serif;">
                     </div>
+                    </div>
+                    
 
                     <div class="mb-4">
                         <label for="regPack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Selecciona tu Pack de Clases</label>
-                        <select id="regPack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">
-                            <option>Clase suelta ($5000)</option>
-                            <option>Pack 4 clases ($18000)</option>
-                            <option>Pack 8 clases ($38000)</option>
-                            <option>Pack 12 clases ($58000)</option>
+                        <select id="regPack" name="id_pack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">                    
+                            <option value="">Seleccionar pack</option>
+                            <option value="1">Clase suelta ($5000)</option>
+                            <option value="2">Pack 4 clases ($18000)</option>
+                            <option value="3">Pack 8 clases ($38000)</option>
+                            <option value="4">Pack 12 clases ($58000)</option>
                         </select>
                     </div>
+                    
+                    <div class="row">
+                        <div class=" col-md-6 mb-3">
+                        <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px; ">
+                            contraseña
+                        </label>
+                        <input type="password" id="regPassword" name="password" class="form-control rounded-0 border-dark p-3" placeholder="Contraseña" required style="font-family: Montserrat, sans-serif;" required>
+                    </div>
+
+                     <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px; ">
+                            Confirmar contraseña
+                        </label>
+                        <input type="password" id="regPassword1" name="confirmar_password" class="form-control rounded-0 border-dark p-3" placeholder="Repeti tu contraseña" required style="font-family: Montserrat, sans-serif;" required>
+                    </div>
+                    </div>
+                   
+
+
+
 
                     <button type="submit" class="btn btn-dark w-100 rounded-0 fw-bold text-uppercase" style="font-family:  Montserrat, sans-serif; letter-spacing: 1px;  border-color: #F4C9D6;">Crear Cuenta y Comprar</button>
                 </fieldset>
@@ -121,7 +179,20 @@
 
 
 
-
+<footer class="py-4 text-center" style="background-color: #F4C9D6; color: black;">
+  <P>Contacto y Redes Sociales</P>
+     <div class="social-icons">
+      <a href="" class="btn btn" style="color: black;">
+         <i class="bi bi-instagram"></i> Istragram
+     </a>
+     <a href="" class="btn btn" style="color:black;">
+      <i class="bi bi-whatsapp"></i> Whatsapp
+     </a>
+     </div>
+     <div class=" color black">
+       © 2026 Studio Gym Danza - Todos los derechos reservados
+     </div>
+</footer>
 
 
 
