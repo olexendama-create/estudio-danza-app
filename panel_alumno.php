@@ -1,7 +1,3 @@
-
-
-
-
 <?php
 session_start(); 
 include("conexion.php");
@@ -26,6 +22,21 @@ $sql = "SELECT
 $resultado = mysqli_query($conexion, $sql);
 
 $cantidadClases = mysqli_num_rows($resultado);
+
+$id_alumno = $_SESSION['id_alumno'];
+
+$sqlAsistencias = "SELECT COUNT(*) as total
+                   FROM asistencias
+                   WHERE id_alumno = '$id_alumno'
+                   AND presente = 1
+                   AND MONTH(fecha) = MONTH(CURDATE())
+                   AND YEAR(fecha) = YEAR(CURDATE())";
+
+$resultadoAsistencias = mysqli_query($conexion, $sqlAsistencias);
+$filaAsistencias = mysqli_fetch_assoc($resultadoAsistencias);
+
+$totalAsistencias = $filaAsistencias['total'];
+
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +109,7 @@ $cantidadClases = mysqli_num_rows($resultado);
         <div class="col-md-3">
             <div class="card-info">
                 <p>Asistencias</p>
-                <h2></h2>
+                <h2><?php echo $totalAsistencias; ?></h2>
                 <span>este mes</span>
             </div>
         </div>
