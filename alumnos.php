@@ -31,10 +31,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav">
         <a class="nav-link active" style="color: #F2F1ED;" href="index.html">Inicio</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.html">Alumnos</a>
-        <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas.html">Disciplinas y Horarios</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
+        <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.html">Tienda</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
       </div>
     </div>
   </div>
@@ -52,13 +52,17 @@
                 <hr style="border-top: 3px solid #F4C9D6; width: 60px; opacity: 1; margin-bottom: 25px;">
 
                 <div class="mb-3">
-                    <label for="LoginDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI</label>
-                    <input type="text" id="loginDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family:  Montserrat, sans-serif;">
+                    <label for="LoginDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI <span style="color:red;">*</span></label>
+                    <input type="text" id="loginDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family:  Montserrat, sans-serif;"
+                    required
+                    >
                 </div>
 
                 <div class="mb-4">
-                    <label for="loginPassword" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Contraseña</label>
-                    <input type="password"  id="loginPassword" name="password" class="form-control rounded-0 border-dark p-3" placeholder="........" style="font-family:  Montserrat, sans-serif;">
+                    <label for="loginPassword" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Contraseña <span style="color:red;">*</span></label>
+                    <input type="password"  id="loginPassword" name="password" class="form-control rounded-0 border-dark p-3" placeholder="........" style="font-family:  Montserrat, sans-serif;"
+                    required
+                    >
                 </div>
 
                 <div class="mb-4">
@@ -69,6 +73,8 @@
                         </label>
                     </div>
                 </div>
+
+                 <p style="font-size:13px; color:#555;"> <span style="color:red;">*</span> Campos obligatorios </p>
 
                 <button type="submit" class="btn btn-dark w-100 rounded-0 fw-bold text-uppercase py-3" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">
                     Ingresar al panel
@@ -88,28 +94,32 @@
                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                        <label for="regNombre" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Nombre</label>
+                        <label for="regNombre" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Nombre <span style="color:red;">*</span></label>
                         <input type="text" id="regNombre" name="nombre" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;"
                         required>
                        </div>
                     
                      <div class=" col-md-6 mb-3">
-                        <label for="regApe" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Apellido</label>
+                        <label for="regApe" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Apellido <span style="color:red;">*</span></label>
                         <input type="text" id="regApellido" name="apellido" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;"
                         required>
                     </div>
                      </div>
 
                     <div class="mb-3">
-                        <label for="regDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI</label>
-                        <input type="text" id="regDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family: Montserrat, sans-serif;">
+                        <label for="regDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI <span style="color:red;">*</span></label>
+                        <input type="text" id="regDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family: Montserrat, sans-serif;"
+                        required pattern="[0-9]+"
+                        >
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">
-                            Tipo de documento
+                            Tipo de documento <span style="color:red;">*</span>
                         </label>
-                        <select name="id_tipo_documento"  class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">
+                        <select name="id_tipo_documento"  class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;" 
+                        required
+                        >
                             <option value="">Seleccionar</option>
                             <option value="1">DNI</option>
                             <option value="2">Pasaporte</option>
@@ -119,28 +129,30 @@
                      <div class="mb-3">
                         <label  class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Fecha de Nacimiento</label>
                         <input type="date" id="regFch" name="fecha_nacimiento" class="form-control rounded-0 border-dark p-3" style="font-family: Montserrat, sans-serif;"
-                        required
+                
                         >
                     </div>
 
                     <div class="row">
                          <div class=" col-md-6 mb-3">
-                        <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Telefono</label>
+                        <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Telefono <span style="color:red;">*</span></label>
                         <input type="tel" id="regTel" name="telefono" class="form-control rounded-0 border-dark p-3" placeholder="Tu telefono" style="font-family: Montserrat, sans-serif;"
-                        required
+                        required pattern="[0-9]+"
                         >
                     </div>
                     
                     <div class=" col-md-6 mb-3">
                         <label for="regEmail" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Correo Electronico (Gmail)</label>
-                        <input type="email" id="regEmail" name="email" class="form-control rounded-0 border-dark p-3" placeholder="ejemplo@gmail.com" required style="font-family: Montserrat, sans-serif;">
+                        <input type="email" id="regEmail" name="email" class="form-control rounded-0 border-dark p-3" placeholder="ejemplo@gmail.com (opcional)"  style="font-family: Montserrat, sans-serif;" >
                     </div>
                     </div>
                     
 
                     <div class="mb-4">
-                        <label for="regPack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Selecciona tu Pack de Clases</label>
-                        <select id="regPack" name="id_pack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">                    
+                        <label for="regPack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Selecciona tu Pack de Clases <span style="color:red;">*</span></label>
+                        <select id="regPack" name="id_pack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;"
+                        required
+                        >                    
                             <option value="">Seleccionar pack</option>
                             <option value="1">Clase suelta ($5000)</option>
                             <option value="2">Pack 4 clases ($18000)</option>
@@ -152,22 +164,26 @@
                     <div class="row">
                         <div class=" col-md-6 mb-3">
                         <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px; ">
-                            contraseña
+                            contraseña <span style="color:red;">*</span>
                         </label>
-                        <input type="password" id="regPassword" name="password" class="form-control rounded-0 border-dark p-3" placeholder="Contraseña" required style="font-family: Montserrat, sans-serif;" required>
+                        <input type="password" id="regPassword" name="password" class="form-control rounded-0 border-dark p-3" placeholder="Contraseña" required style="font-family: Montserrat, sans-serif;" 
+                        required minlength="6"
+                        >
                     </div>
 
                      <div class="col-md-6 mb-3">
                         <label class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px; ">
-                            Confirmar contraseña
+                            Confirmar contraseña <span style="color:red;">*</span>
                         </label>
-                        <input type="password" id="regPassword1" name="confirmar_password" class="form-control rounded-0 border-dark p-3" placeholder="Repeti tu contraseña" required style="font-family: Montserrat, sans-serif;" required>
+                        <input type="password" id="regPassword1" name="confirmar_password" class="form-control rounded-0 border-dark p-3" placeholder="Repeti tu contraseña" required style="font-family: Montserrat, sans-serif;" 
+                        required minlength="6"
+                        >
                     </div>
                     </div>
                    
 
 
-
+                    <p style="font-size:13px; color:#555;"> <span style="color:red;">*</span> Campos obligatorios </p>
 
                     <button type="submit" class="btn btn-dark w-100 rounded-0 fw-bold text-uppercase" style="font-family:  Montserrat, sans-serif; letter-spacing: 1px;  border-color: #F4C9D6;">Crear Cuenta y Comprar</button>
                 </fieldset>
@@ -183,7 +199,7 @@
   <P>Contacto y Redes Sociales</P>
      <div class="social-icons">
       <a href="" class="btn btn" style="color: black;">
-         <i class="bi bi-instagram"></i> Istragram
+         <i class="bi bi-instagram"></i> Instragram
      </a>
      <a href="" class="btn btn" style="color:black;">
       <i class="bi bi-whatsapp"></i> Whatsapp

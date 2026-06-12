@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+include("conexion.php");
+
+$sql = "SELECT * FROM categorias_disciplinas";
+$resultado = mysqli_query($conexion,$sql);
+
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,17 +138,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" style="color: #F2F1ED;" href="inicio.html">Inicio</a>
+        <a class="nav-link active" style="color: #F2F1ED;" href="index.html">Inicio</a>
         <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
-        <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas.html">Disciplinas y Horarios</a>
+        <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.html">Tienda</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
       </div>
     </div>
   </div>
 </nav>
-
-
 
 
 <body>
@@ -162,9 +170,10 @@
         horarios y profesores.
     </P>
 
-    <button style="background: #e8b4d8; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-        Ver horarios
-    </button>
+    <a href="disciplinas_panel.php?ver_horarios=1" class="btn-horarios">
+        Ver Horarios
+    </a>
+
     </div>
 
     <div style="flex: 1; min-width: 65%;">
@@ -183,75 +192,116 @@
 
     <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 22px;">
 
-    <div class="disciplina-card" style="background-image: ;">
-        <div class="disciplina-overlay">
-            <h3>Ritmos<br>Urbanos</h3>
-            <p>Lun y Mie 18:30 hs</p>
-            <span>--</span>
-        </div>
-     </div>
+    <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
 
-      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        <img src="../Studio Gym Dance/videos e imagenes/contemporaneo.PNG" style="width: 100%; height: 250px; object-fit: cover;">
+   <div class="card-disciplina">
+    
+        <img class="img-disciplina"
+             src="<?php echo $fila['imagen_url']; ?>">
 
-         <div style="padding: 20px;">
-            <h3>Contemporaneo</h3>
+         <div class="info-disciplina">
+            <h3><?php echo $fila['nombrecategoria']; ?></h3>
+                       
             <p>
-                Juveniles <br>
-                Adultos
+               <?php echo $fila['descripcion']; ?>
             </p>
         </div>
      </div>
 
-    <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
+<?php  } ?>
 
-        <div style="padding: 20px;">
-            <h3>Urbano y Reggaeton</h3>
-            <p>
-                Kids <br>
-                Juveniles <br>
-                Adultos
-            </p>
-        </div>
+</div>
+
+<?php if(isset($_GET['ver_horarios'])) { ?>
+
+
+<div class="modal-horarios">
+     <div class="contenido-modal calendario-modal">
+
+     <a href="disciplinas_panel.php" class="cerrar-modal">x</a>
+
+     <h2 class="titulo">Horarios y Clases Disponibles</h2>
+     <p class="subtitulo-modal">Calendario semanal del estudio</p>
+
+     <div class="calendarios">
+        
+        <div class="celda encabezado">Hora</div>
+        <div class="celda encabezado">Lunes</div>
+        <div class="celda encabezado">Martes</div>
+        <div class="celda encabezado">Miercoles</div>
+        <div class="celda encabezado">Jueves</div>
+        <div class="celda encabezado">Viernes</div>
+        <div class="celda encabezado">Sabado</div>
+
+        <div class="celda hora">16:00</div>
+        <div class="celda clase clasica" onclick="seleccionarClase(1,this)">Danza Clasica<br><span>Kids . Sala 1</span></div>
+        <div class="celda vacia"></div>
+        <div class="celda clase clasica" onclick="seleccionarClase(2,this)">Danza Clasica<br><span>Kids . Sala 1</span></div>
+        <div class="celda vacia"></div>
+        <div class="celda vacia"></div>
+        <div class="celda clase arabe" onclick="seleccionarClase(3,this)">Arabe <br><span>Kids . Sala 2</span></div>
+
+        <div class="celda hora">17:00</div>
+        <div class="celda clase tap" onclick="seleccionarClase(4,this)">Tap <br><span>Kids . Sala 1</span></div>
+        <div class="celda clase latinos"onclick="seleccionarClase(5,this)" >Ritmos Latinos <br><span>Kids . Sala 2</span></div>
+        <div class="celda clase tap" onclick="seleccionarClase(6,this)">Tap <br><span>Kids . Sala 1</span></div>
+        <div class="celda vacia"></div>
+        <div class="celda clase reggaeton" onclick="seleccionarClase(7,this)">Reggaeton <br><span>Kids . Sala 2</span></div>
+        <div class="celda clase arabe" onclick="seleccionarClase(26,this)">Arabe <br><span>Juveniles . Sala 2</span></div>
+
+        <div class="celda hora">18:00</div>
+        <div class="celda clase urbano" onclick="seleccionarClase(8,this)">Urbano <br><span>Juveniles . Sala 2</span></div>
+        <div class="celda clase clasica" onclick="seleccionarClase(9,this)">Danza Clasica <br><span>Juveniles . Sala 1</span></div>
+        <div class="celda clase urbano" onclick="seleccionarClase(10,this)">Urbano <br><span>Juveniles . Sala 2</span></div>
+        <div class="celda clase tap" onclick="seleccionarClase(11,this)">Tap <br><span>Juveniles . Sala 1</span></div>
+        <div class="celda clase clasica" onclick="seleccionarClase(12,this)">Danza Clasica <br><span>Juveniles . Sala 1</span></div>
+        <div class="celda vacia"></div>
+
+        <div class="celda hora">19:00</div>
+        <div class="celda vacia"></div>
+        <div class="celda clase femme" onclick="seleccionarClase(13,this)">Femme <br><span>Juveniles . sala 2</span></div>
+        <div class="celda clase arabe" onclick="seleccionarClase(14,this)">Arabe <br><span>Adultos . Sala 2</span></div>
+        <div class="celda clase urbano" onclick="seleccionarClase(15,this)">Urbano <br><span>Juveniles . Sala 2</span></div>
+        <div class="celda vacia"></div>
+        <div class="celda vacia"></div>
+
+        <div class="celda hora">20:00</div>
+        <div class="celda clase latinos" onclick="seleccionarClase(16,this)">Ritmos Latinos <br><span>Adultos . Sala 2</span></div>
+        <div class="celda clase contemporaneo" onclick="seleccionarClase(17,this)">Contemporaneo <br><span>Adultos . Sala 1</span></div>
+        <div class="celda clase latinos" onclick="seleccionarClase(18,this)">Ritmos Latinos <br><span>Adultos . Sala 2</span></div>
+        <div class="celda clase clasica" onclick="seleccionarClase(19,this)">Danza Clasica <br><span>Adultos . Sala 1</span></div>
+        <div class="celda clase femme" onclick="seleccionarClase(20,this)">Femme <br><span>Adultos . Sala 2</span></div>
+        <div class="celda vacia"></div>
+
+        <div class="celda hora">21:00</div>
+        <div class="celda clase urbano"  onclick="seleccionarClase(21,this)">Urbano <br><span>Adultos . Sala 2</span> </div>
+        <div class="celda clase reggaeton"  onclick="seleccionarClase(22,this)">Reggaeton <br><span>Adultos . Sala 2</span></div>
+        <div class="celda clase heels" onclick="seleccionarClase(23,this)" >Heels <br><span>Adultos . Sala 1</span></div>
+        <div class="celda clase reggaeton"  onclick="seleccionarClase(24,this)">Reggaeton <br><span>Adultos . Sala 2</span></div>
+        <div class="celda clase heels"  onclick="seleccionarClase(25,this)">Heels <br><span>Adultos . Sala 1</span></div>
+        <div class="celda vacia"></div>
+        
      </div>
 
-      <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
+     <form action="inscribirse.php" method="POST" onsubmit="return inscribirme()">
+        <input type="hidden" name="clases" id="clases">
+        <button type="submit">Inscribirme</button>
+     </form>
+       
+     
 
-         <div style="padding: 20px;">
-            <h3>Femme y Heels</h3>
-            <p>
-                Tecnico Femme <br>
-                Heels Femme
-            </p>
-        </div>
-     </div>
+     
 
-     <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
-
-         <div style="padding: 20px;">
-            <h3>Ritmos Latinos</h3>
-            <p>
-                Salsa <br>
-                Bachata <br>
-                Merengue
-            </p>
-        </div>
-     </div>
-
-     <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
-        <img src="" style="width: 100%; height: 250px; object-fit: cover;">
-
-         <div style="padding: 20px;">
-            <h3>Arabe y Tap</h3>
-            <p>
-                Todos los niveles
-            </p>
-        </div>
      </div>
 </div>
+
+<?php  } ?>
+
+
+
+
+
+
 </section>
 
 
@@ -269,7 +319,7 @@
   <P>Contacto y Redes Sociales</P>
      <div class="social-icons">
       <a href="" class="btn btn" style="color: black;">
-         <i class="bi bi-instagram"></i> Istragram
+         <i class="bi bi-instagram"></i> Instragram
      </a>
      <a href="" class="btn btn" style="color:black;">
       <i class="bi bi-whatsapp"></i> Whatsapp
@@ -281,5 +331,70 @@
 </footer>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+
+<script>
+    var clasesSeleccionadas = [];
+
+    function seleccionarClase(idClase, elemento) {
+      
+        
+    if(clasesSeleccionadas.indexOf(idClase) !== -1){ 
+
+        clasesSeleccionadas = clasesSeleccionadas.filter(function(id){ 
+            return id != idClase;
+
+        });
+
+         elemento.style.background = "";
+
+    }else{
+
+        clasesSeleccionadas.push(idClase);
+        
+        elemento.style.background = "green";
+
+     }
+
+     console.log(clasesSeleccionadas);
+}
+
+function inscribirme(){
+    
+     if(clasesSeleccionadas.length == 0){
+     alert("Selecciona al menos una clase");
+     return false;
+   }
+
+   document.getElementById("clases").value = clasesSeleccionadas;
+    
+   return true;
+}
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

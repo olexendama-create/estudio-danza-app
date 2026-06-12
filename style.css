@@ -358,3 +358,401 @@ p, span, h2 {
         padding: 30px 20px !important;
     }
 }
+
+
+.card-disciplina{
+   position: relative;
+   border-radius: 25px;
+   overflow: hidden;
+   height: 420px;
+   cursor: pointer;
+}
+
+
+.img-disciplina{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   
+    transition: 0.4s;
+}
+
+.card-disciplina:hover .img-disciplina{
+    transform: scale(1.08);
+}
+
+.info-disciplina{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(
+        transparent,
+        rgba(0,0,0,0.85)
+    );
+}
+
+.info-disciplina h3{
+    color: white;
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-family:  Anton , sans-serif;
+}
+
+.info-disciplina p{
+    color: white;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.modal-horarios{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    overflow: auto;
+}
+
+.calendario-modal{
+    width: 92%;
+    max-width: 1250px;
+    margin: 35px auto;
+    padding: 30px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.cerrar-modal{
+    float: right;
+    font-size: 32px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.calendario-modal h2{
+    color: white;
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 5px;
+}
+
+.subtitulo-modal{
+    color: #f4c2f7;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.calendarios{
+    display: grid;
+    grid-template-columns: 90px repeat(6,1fr);
+    gap: 8px;
+}
+
+.celda{
+    min-height: 78px;
+    border-radius: 16px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.18);
+    color: white;
+    font-size: 14px;
+}
+
+.encabezado{
+    min-height: auto;
+    text-align: center;
+    font-weight: bold;
+    background: linear-gradient(135deg,#f4c2f7,#c9b6ff);
+    color: #222;
+}
+
+.hora{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.clase{
+    font-weight: bold;
+    color: #222;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+.clase span{
+    display: block;
+    font-size: 12px;
+    margin-top: normal;
+}
+
+.vacia{
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.clasica{ background: #ffd6e8;}
+.reggaeton{ background: #ffc2f2;}
+.tap{ background: #d9c2ff;}
+.latinos{ background: #ffe0a8;}
+.arabe{ background: #ffe7a8;}
+.urbano{ background: #c9d6ff;}
+.femme{ background: #ffb3d9;}
+.contemporaneo{ background: #c7f0ff;}
+.heels{ background: #ff9ecb;}
+
+.acciones-modal{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-inscribirse{
+    display: inline-block;
+    padding: 12px 30px;
+    background: #f4c2f7;
+    color: #222;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    
+}
+
+.btn-horarios{
+    border-radius: 30px;
+    color: white;
+    background-color: #f4c2f7;
+    font-family: Anton , sans-serif;
+}
+
+.titulo{
+    font-size: 30px;
+    font-family: Anton , sans-serif;
+    color: white;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.subtitulo-modal{
+    font-size: 25px;
+    font-family: Anton , sans-serif;
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.clase{
+    transition: 0.3s;
+}
+
+.clase:hover{
+    transform: scale(1.05);
+}
+
+.clase span{
+    display: inline-block;
+    margin-top: 5px;
+    padding: 4px 8px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.07);
+    font-size: 12px;
+}
+
+.kids{
+    border-left: 200px solid #fec8ff;
+}
+
+.juveniles{
+    border-left: 5px solid #b48cff;
+}
+
+.adultos{
+    border-left: 5px solid #ff8ec7;
+}
+
+.celda.clase{
+    cursor: pointer;
+}
+
+.celda.clase:hover{
+    transform: sclae(1.03);
+}
+
+.panel_alumno{
+    background-color: var(--gris) !important; 
+    color: #111;
+}
+
+.panel-nav{
+    background: #0b0b0b;
+    padding: 18px 0;
+}
+
+.panel-nav .navbar-brand{
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.panel-nav .panel-brand span{
+    color: #f4c2f7;
+}
+
+.panel-nav .nav-link{
+    color: white;
+    margin: 0 14px;
+    font-weight: 500;
+}
+
+.panel-nav .nav-link.active{
+    background: #f4c2f7;
+    color: white;
+    border-radius: 25px;
+    padding-bottom: 8px 20px;
+}
+
+.cuenta-btn{
+    background: white;
+    color: #111;
+    border-radius: 25px;
+    padding: 8px 22px;
+}
+
+.panel-hero{
+    padding: 70px 0 30px;
+}
+
+.subtitulo-panel{
+    color: #f4c2f7;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.panel-hero h1{
+    font-size: 70px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.95;
+}
+
+.panel-hero h1 span{
+    color: #f4c2f7;
+}
+
+.texto-panel{
+    font-size: 20px;
+    margin: 25px 0;
+}
+
+.boton-rosa{
+    background: #f4c2f7;
+    color: white;
+    border-radius: 12px;
+    padding: 13px 30px;
+    font-weight: bold;
+}
+
+.boton-rosa:hover{
+    background: #111;
+    color: white;
+}
+
+.img-hero{
+    max-width: 520px;
+    width: 100%;
+    filter: grayscale(100%);
+    border-radius: 30px;
+}
+
+.cards-panel{
+    margin-top: 20px;
+}
+
+.card-info{
+    background: white;
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    min-height: 160px;
+}
+
+.card-info p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-info h2{
+    font-size: 42px;
+    font-weight: 900;
+}
+
+.card-info span{
+    color: #555;
+}
+
+.mis-clases{
+    margin-top: 50px;
+    padding-bottom: 70px;
+}
+
+.mis-clases h3{
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.clase-card{
+    background: white;
+    border-radius: 18px;
+    padding: 20px 25px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.clase-card h4{
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.clase-card p{
+    margin: 0;
+    color: #555;
+}
+
+.clase-card span{
+    font-size: 36px;
+    color: #f4c2f7;
+}
+
+.frase-card{
+    background: white;
+    border-radius: 22px;
+    padding: 45px;
+    min-height: 390px;
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("videos e imagenes/danza-panel-2.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.frase-card h2{
+    font-size: 34px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.frase-card h2 span{
+    color: #f4c2f7;
+}
+
+.hero-title{
+    font-family: "Anton", sans-serif;
+}
+
