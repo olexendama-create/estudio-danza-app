@@ -6,7 +6,14 @@
 }
 
 
- body {
+.body {
+    background-color: var(--gris) !important;
+    color: #000000;
+    margin: 0;
+    padding: 0; 
+}
+
+.body-tienda{
     background-color: var(--gris) !important;
     color: #000000;
     margin: 0;
@@ -755,3 +762,6 @@ p, span, h2 {
 .hero-title{
     font-family: "Anton", sans-serif;
 }
+
+
+

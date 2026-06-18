@@ -69,7 +69,7 @@ $totalAsistencias = $filaAsistencias['total'];
         <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.html">Tienda</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
       </div>
     </div>
   </div>

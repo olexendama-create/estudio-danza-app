@@ -96,20 +96,20 @@
                         <div class="col-md-6 mb-3">
                         <label for="regNombre" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Nombre <span style="color:red;">*</span></label>
                         <input type="text" id="regNombre" name="nombre" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;"
-                        required>
+                        required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+">
                        </div>
                     
                      <div class=" col-md-6 mb-3">
                         <label for="regApe" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Apellido <span style="color:red;">*</span></label>
                         <input type="text" id="regApellido" name="apellido" class="form-control rounded-0 border-dark p-3" placeholder="Tu nombre completo" style="font-family: Montserrat, sans-serif;"
-                        required>
+                        required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+">
                     </div>
                      </div>
 
                     <div class="mb-3">
                         <label for="regDni" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Numero de DNI <span style="color:red;">*</span></label>
-                        <input type="text" id="regDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family: Montserrat, sans-serif;"
-                        required pattern="[0-9]+"
+                        <input type="number" id="regDni" name="dni" class="form-control rounded-0 border-dark p-3" placeholder="Tu documento sin puntos" style="font-family: Montserrat, sans-serif;"
+                        required pattern="[0-9]{7,8}"
                         >
                     </div>
 
@@ -148,18 +148,7 @@
                     </div>
                     
 
-                    <div class="mb-4">
-                        <label for="regPack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;">Selecciona tu Pack de Clases <span style="color:red;">*</span></label>
-                        <select id="regPack" name="id_pack" class="form-label fw-bold text-uppercase small text-muted" style="font-family: Montserrat, sans-serif; letter-spacing: 1px;"
-                        required
-                        >                    
-                            <option value="">Seleccionar pack</option>
-                            <option value="1">Clase suelta ($5000)</option>
-                            <option value="2">Pack 4 clases ($18000)</option>
-                            <option value="3">Pack 8 clases ($38000)</option>
-                            <option value="4">Pack 12 clases ($58000)</option>
-                        </select>
-                    </div>
+                 
                     
                     <div class="row">
                         <div class=" col-md-6 mb-3">

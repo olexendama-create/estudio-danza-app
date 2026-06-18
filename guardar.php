@@ -16,6 +16,17 @@ $id_tipo_documento = $_POST ['id_tipo_documento'];
 $password = $_POST ['password'];
 $id_pack = $_POST ['id_pack'];
 
+$password = $_POST['password'];
+$confirmar_password = $_POST['confirmar_password'];
+
+if($password != $repetir_password){
+    echo "<script>
+            alert('Las contraseñas no coinciden');
+            window.history.back();
+          </script>";
+    exit();
+}
+
 $sql ="INSERT INTO alumnos
 (nombre, apellido, numero_documento, telefono, email, fecha_nacimiento, id_tipo_documento, password, id_pack)
 VALUES
