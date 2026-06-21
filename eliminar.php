@@ -12,7 +12,7 @@ $sql = "DELETE FROM alumnos
 
 mysqli_query($conexion,$sql);
 
-header("Location:index.php");
+header("Location:alumnos_abm.php");
 exit();
 
 }
@@ -24,7 +24,7 @@ if($tabla == "profesores"){
 
     mysqli_query($conexion,$sql);
 
-    header("Location:profesores.php");
+    header("Location:profesores_abm.php");
     exit();
 }
 
@@ -38,6 +38,82 @@ if($tabla == "packs"){
     header("Location:packs.php");
     exit();
 }
+
+if($tabla=="disciplinas"){
+
+$sql = "DELETE FROM disciplinas
+        WHERE id_disciplina='$id'";
+
+mysqli_query($conexion,$sql);
+
+header("Location:disciplinas_abm.php");
+exit();
+
+}
+
+if($tabla=="niveles"){
+
+$sql = "DELETE FROM niveles
+        WHERE id_nivel='$id'";
+
+mysqli_query($conexion,$sql);
+
+header("Location:niveles_abm.php");
+exit();
+
+}
+
+if($tabla=="talles"){
+
+$sql = "DELETE FROM talles
+        WHERE id_talle='$id'";
+
+mysqli_query($conexion,$sql);
+
+header("Location:talles_abm.php");
+exit();
+
+}
+
+if($tabla=="materiales"){
+
+$sql="DELETE FROM materiales
+WHERE id_material='$id'";
+
+mysqli_query($conexion,$sql);
+
+header("Location:materiales_abm.php");
+exit();
+
+}
+
+if($tabla=="clases"){
+
+$sql="DELETE FROM clases
+WHERE id_clase='$id'";
+
+mysqli_query($conexion,$sql);
+
+header("Location:clases_abm.php");
+exit();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ?>

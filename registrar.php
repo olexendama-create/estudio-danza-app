@@ -14,7 +14,7 @@ $id_tipo_documento = $_POST ['password'];
 $password = $_POST['password'];
 $confirmar_password = $_POST['confirmar_password'];
 
-if($password != $repetir_password){
+if($password != $confirmar_password){
     echo "<script>
             alert('Las contraseñas no coinciden');
             window.history.back();
@@ -22,7 +22,7 @@ if($password != $repetir_password){
     exit();
 }
 
-$numero_documento = $_POST['numero_documento'];
+$numero_documento = $_POST['dni'];
 
 $verificar = mysqli_query($conexion,
 "SELECT * FROM alumnos
@@ -41,7 +41,7 @@ $sql ="INSERT INTO alumnos
 
 VALUES 
 
-('$nombre', '$apellido', '$dni', '$telefono', '$email', '$fecha_nacimiento', '$password')";
+('$nombre', '$apellido', '$numero_documento', '$telefono', '$email', '$fecha_nacimiento', '$password')";
 
 if(mysqli_query($conexion, $sql)){ 
 echo "<script>

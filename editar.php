@@ -183,4 +183,270 @@ if($tabla == "packs"){
 <?php
 }
 
+if($tabla=="disciplinas"){
+
+$sql = "SELECT * FROM disciplinas
+        WHERE id_disciplina='$id'";
+
+$resultado = mysqli_query($conexion,$sql);
+
+$disciplina = mysqli_fetch_assoc($resultado);
+
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar Disciplina</title>
+</head>
+<body>
+
+<h1>Editar Disciplina</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="disciplinas">
+
+<input type="hidden"
+       name="id_disciplina"
+       value="<?php echo $disciplina['id_disciplina']; ?>">
+
+<input type="text"
+       name="nombre_disciplina"
+       value="<?php echo $disciplina['nombre_disciplina']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+</body>
+</html>
+
+<?php
+}
+
+if($tabla=="niveles"){
+
+$sql = "SELECT * FROM niveles
+        WHERE id_nivel='$id'";
+
+$resultado = mysqli_query($conexion,$sql);
+
+$nivel = mysqli_fetch_assoc($resultado);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar Nivel</title>
+</head>
+<body>
+
+<h1>Editar Nivel</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="niveles">
+
+<input type="hidden"
+       name="id_nivel"
+       value="<?php echo $nivel['id_nivel']; ?>">
+
+<input type="text"
+       name="nombre_nivel"
+       value="<?php echo $nivel['nombre_nivel']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+</body>
+</html>
+
+<?php
+}
+
+if($tabla=="talles"){
+
+$sql = "SELECT * FROM talles
+        WHERE id_talle='$id'";
+
+$resultado = mysqli_query($conexion,$sql);
+
+$talle = mysqli_fetch_assoc($resultado);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar Talle</title>
+</head>
+<body>
+
+<h1>Editar Talle</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="talles">
+
+<input type="hidden"
+       name="id_talle"
+       value="<?php echo $talle['id_talle']; ?>">
+
+<input type="text"
+       name="nombre_talle"
+       value="<?php echo $talle['nombre_talle']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+</body>
+</html>
+
+<?php
+}
+
+if($tabla=="materiales"){
+
+$sql="SELECT * FROM materiales
+WHERE id_material='$id'";
+
+$resultado=mysqli_query($conexion,$sql);
+
+$material=mysqli_fetch_assoc($resultado);
+
+?>
+<h1>Editar Material</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="materiales">
+
+<input type="hidden"
+name="id_material"
+value="<?php echo $material['id_material']; ?>">
+
+<input type="number"
+name="id_clase"
+value="<?php echo $material['id_clase']; ?>">
+
+<input type="text"
+name="titulo"
+value="<?php echo $material['titulo']; ?>">
+
+<input type="text"
+name="descripcion"
+value="<?php echo $material['descripcion']; ?>">
+
+<input type="text"
+name="archivo"
+value="<?php echo $material['archivo']; ?>">
+
+<input type="date"
+name="fecha_subida"
+value="<?php echo $material['fecha_subida']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+<?php
+}
+
+
+if($tabla=="clases"){
+
+$sql="SELECT * FROM clases
+WHERE id_clase='$id'";
+
+$resultado=mysqli_query($conexion,$sql);
+
+$clase=mysqli_fetch_assoc($resultado);
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar Clase</title>
+</head>
+<body>
+
+<h1>Editar Clase</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="clases">
+
+<input type="hidden"
+name="id_clase"
+value="<?php echo $clase['id_clase']; ?>">
+
+<input type="number"
+name="id_profesor"
+value="<?php echo $clase['id_profesor']; ?>">
+
+<input type="number"
+name="id_disciplina"
+value="<?php echo $clase['id_disciplina']; ?>">
+
+<input type="time"
+name="horario"
+value="<?php echo $clase['horario']; ?>">
+
+<input type="number"
+name="cupo_maximo"
+value="<?php echo $clase['cupo_maximo']; ?>">
+
+<input type="number"
+name="id_dia"
+value="<?php echo $clase['id_dia']; ?>">
+
+<input type="number"
+name="id_nivel"
+value="<?php echo $clase['id_nivel']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+</body>
+</html>
+
+<?php
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

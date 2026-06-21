@@ -20,10 +20,10 @@ $resultado = mysqli_query($conexion,$sql);
     
  <input type="hidden" name="tabla" value="disciplinas">
 
-    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="nombre_disciplina" placeholder="Nombre Disciplina" required>
 
     <button type="submit">
-        Guardar Profesor
+        Guardar Disciplina
     </button>
 
 </form>
@@ -34,9 +34,7 @@ $resultado = mysqli_query($conexion,$sql);
 
 <tr>
     <th>ID</th>
-    <th>Nombre</th>
-    <th>Apellido</th>
-    <th>Teléfono</th>
+    <th>Disciplina</th>
     <th>Acciones</th>
 </tr>
 
@@ -44,20 +42,18 @@ $resultado = mysqli_query($conexion,$sql);
 
 <tr>
 
-    <td><?php echo $fila['id_profesor']; ?></td>
-    <td><?php echo $fila['nombre']; ?></td>
-    <td><?php echo $fila['apellido']; ?></td>
-    <td><?php echo $fila['telefono']; ?></td>
+    <td><?php echo $fila['id_disciplina']; ?></td>
+    <td><?php echo $fila['nombre_disciplina']; ?></td>
 
     <td>
 
-        <a href="editar.php?id=<?php echo $fila['id_profesor']; ?>&tabla=profesores">
+        <a href="editar.php?id=<?php echo $fila['id_disciplina']; ?>&tabla=disciplinas">
             Editar
         </a>
 
         |
 
-        <a href="eliminar.php?id=<?php echo $fila['id_profesor']; ?>&tabla=profesores">
+        <a href="eliminar.php?id=<?php echo $fila['id_disciplina']; ?>&tabla=disciplinas">
             Eliminar
         </a>
 
