@@ -441,25 +441,24 @@ body{
 
 <body>
 
-<nav class="navbar navbar-expand-lg">
+<nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top py-3" style="background-color: #000;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Studio Gym Dance</a>
-
-    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <a class="navbar-brand fw-bold" href="#" style="color: #F4C9D6; letter-spacing: 1px;">Studio Gym Dance</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="index.html">Inicio</a>
-        <a class="nav-link" href="alumnos.php">Alumnos</a>
-        <a class="nav-link" href="disciplinas_panel.php">Disciplinas y Horarios</a>
-        <a class="nav-link" href="profesores.html">Profesores</a>
-        <a class="nav-link active" href="tienda.php">Tienda</a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" style="color: #F2F1ED;" href="index.html">Inicio</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
+        <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
+        <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
+        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
       </div>
     </div>
   </div>
 </nav>
+
 
 <div class="shop-container">
 

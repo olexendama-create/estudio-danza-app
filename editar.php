@@ -65,9 +65,6 @@ $alumno = mysqli_fetch_assoc($resultado);
           name="password"
           value="<?php echo $alumno['password']; ?>">
 
-    <input type="number"
-          name="id_pack"
-          value="<?php echo $alumno['id_pack']; ?>">
 
 <button type="submit">
     Actualizar
@@ -428,7 +425,194 @@ Actualizar
 
 <?php
 }
+
+if($tabla=="tipos_documento"){
+
+$sql="SELECT * FROM tipos_documento
+WHERE id_tipo_documento='$id'";
+
+$resultado=mysqli_query($conexion,$sql);
+
+$tipo=mysqli_fetch_assoc($resultado);
 ?>
+<h1>Editar Tipo Documento</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="tipos_documento">
+
+<input type="hidden"
+name="id_tipo_documento"
+value="<?php echo $tipo['id_tipo_documento']; ?>">
+
+<input type="text"
+name="nombre_documento"
+value="<?php echo $tipo['nombre_documento']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+<?php
+}
+
+if($tabla=="dias_semanas"){
+
+    $sql="SELECT * FROM dias_semanas
+    WHERE id_dia='$id'";
+
+    $resultado=mysqli_query($conexion,$sql);
+
+    $dia=mysqli_fetch_assoc($resultado);
+?>
+<h1>Editar Día</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="dias_semanas">
+
+<input type="hidden"
+name="id_dia"
+value="<?php echo $dia['id_dia']; ?>">
+
+<input type="text"
+name="nombre_dia"
+value="<?php echo $dia['nombre_dia']; ?>">
+
+<button type="submit">
+Actualizar
+</button>
+
+</form>
+
+<?php
+}
+
+if($tabla=="productos"){
+
+    $sql="SELECT * FROM productos
+    WHERE id_producto='$id'";
+
+    $resultado=mysqli_query($conexion,$sql);
+
+    $producto=mysqli_fetch_assoc($resultado);
+?>
+
+<h1>Editar Producto</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="productos">
+
+<input type="hidden"
+name="id_producto"
+value="<?php echo $producto['id_producto']; ?>">
+
+Nombre:
+<input type="text"
+name="nombre_producto"
+value="<?php echo $producto['nombre_producto']; ?>">
+
+<br><br>
+
+Descripción:
+<input type="text"
+name="descripcion"
+value="<?php echo $producto['descripcion']; ?>">
+
+<br><br>
+
+Stock:
+<input type="number"
+name="stock"
+value="<?php echo $producto['stock']; ?>">
+
+<br><br>
+
+Imagen:
+<input type="text"
+name="imagen"
+value="<?php echo $producto['imagen']; ?>">
+
+<br><br>
+
+Precio:
+<input type="number"
+name="precio"
+value="<?php echo $producto['precio']; ?>">
+
+<br><br>
+
+<button type="submit">Actualizar</button>
+
+</form>
+
+<?php
+}
+
+if($tabla=="categorias_disciplinas"){
+
+    $sql="SELECT * FROM categorias_disciplinas
+    WHERE idcategorias_disciplinas='$id'";
+
+    $resultado=mysqli_query($conexion,$sql);
+
+    $categoria=mysqli_fetch_assoc($resultado);
+?>
+
+<h1>Editar Categoría</h1>
+
+<form action="actualizar.php" method="POST">
+
+<input type="hidden" name="tabla" value="categorias_disciplinas">
+
+<input type="hidden"
+name="idcategorias_disciplinas"
+value="<?php echo $categoria['idcategorias_disciplinas']; ?>">
+
+Nombre:
+<input type="text"
+name="nombrecategoria"
+value="<?php echo $categoria['nombrecategoria']; ?>">
+
+<br><br>
+
+Imagen:
+<input type="text"
+name="imagen_url"
+value="<?php echo $categoria['imagen_url']; ?>">
+
+<br><br>
+
+Descripción:
+<input type="text"
+name="descripcion"
+value="<?php echo $categoria['descripcion']; ?>">
+
+<br><br>
+
+<button type="submit">Actualizar</button>
+
+</form>
+
+<?php
+}
+?>
+
+
+
+
+
+
+
+
+?>
+
+
+
+
 
 
 

@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include("conexion.php");
 
 $tabla = $_POST['tabla'];
@@ -19,12 +22,26 @@ $password = $_POST ['password'];
 
 $sql ="INSERT INTO alumnos
 (nombre, apellido, numero_documento, telefono, email, fecha_nacimiento, id_tipo_documento, password)
-VALUES";
+VALUES
+('$nombre', 
+'$apellido', 
+'$numero_documento', 
+'$telefono', '$email', 
+'$fecha_nacimiento', 
+'$id_tipo_documento', 
+'$password'
+)";
 
-mysqli_query($conexion,$sql);
-('$nombre', '$apellido', '$numero_documento', '$telefono', '$email', '$fecha_nacimiento', '$id_tipo_documento', '$password')
 
-header("Location:alumnos_abm.php");
+$resultado = mysqli_query($conexion,$sql);
+
+if(!$resultado){
+    die(mysqli_error($Rconexion));
+}
+
+header("Location: alumnos_abm.php");
+exit();
+
 
 }
 
@@ -153,13 +170,71 @@ exit();
 
 }
 
+if($tabla=="tipos_documento"){
 
+$nombre_documento=$_POST['nombre_documento'];
 
+$sql="INSERT INTO tipos_documento
+(nombre_documento)
+VALUES
+('$nombre_documento')";
 
+mysqli_query($conexion,$sql);
 
+header("Location:tipos_documento_abm.php");
+exit();
+}
 
+if($tabla=="dias_semanas"){
 
+    $nombre_dia=$_POST['nombre_dia'];
 
+    $sql="INSERT INTO dias_semanas
+    (nombre_dia)
+    VALUES
+    ('$nombre_dia')";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:dias_semanas_abm.php");
+    exit();
+}
+
+if($tabla=="productos"){
+
+    $nombre_producto=$_POST['nombre_producto'];
+    $descripcion=$_POST['descripcion'];
+    $stock=$_POST['stock'];
+    $imagen=$_POST['imagen'];
+    $precio=$_POST['precio'];
+
+    $sql="INSERT INTO productos
+    (nombre_producto,descripcion,stock,imagen,precio)
+    VALUES
+    ('$nombre_producto','$descripcion','$stock','$imagen','$precio')";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:productos_abm.php");
+    exit();
+}
+
+if($tabla=="categorias_disciplinas"){
+
+    $nombrecategoria=$_POST['nombrecategoria'];
+    $imagen_url=$_POST['imagen_url'];
+    $descripcion=$_POST['descripcion'];
+
+    $sql="INSERT INTO categorias_disciplinas
+    (nombrecategoria,imagen_url,descripcion)
+    VALUES
+    ('$nombrecategoria','$imagen_url','$descripcion')";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:categorias_disciplinas_abm.php");
+    exit();
+}
 
 
 

@@ -35,7 +35,7 @@ if($tabla == "packs"){
 
     mysqli_query($conexion,$sql);
 
-    header("Location:packs.php");
+    header("Location:packs_abm.php");
     exit();
 }
 
@@ -99,13 +99,49 @@ exit();
 
 }
 
+if($tabla=="tipos_documento"){
 
+$sql="DELETE FROM tipos_documento
+WHERE id_tipo_documento='$id'";
 
+mysqli_query($conexion,$sql);
 
+header("Location:tipos_documento_abm.php");
+exit();
+}
 
+if($tabla=="dias_semanas"){
 
+    $sql="DELETE FROM dias_semanas
+    WHERE id_dia='$id'";
 
+    mysqli_query($conexion,$sql);
 
+    header("Location:dias_semanas_abm.php");
+    exit();
+}
+
+if($tabla=="productos"){
+
+    $sql="DELETE FROM productos
+    WHERE id_producto='$id'";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:productos_abm.php");
+    exit();
+}
+
+if($tabla=="categorias_disciplinas"){
+
+    $sql="DELETE FROM categorias_disciplinas
+    WHERE idcategorias_disciplinas='$id'";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:categorias_disciplinas_abm.php");
+    exit();
+}
 
 
 

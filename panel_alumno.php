@@ -70,6 +70,16 @@ $totalAsistencias = $filaAsistencias['total'];
         <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
         <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
         <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
+        <div class="d-flex align-items-center ms-auto">
+         <span class="badge rounded-pill px-3 py-2 me-4"
+           style="background:#ff8ec7;color:#000;">
+          👤 <?php echo $_SESSION['nombre_alumno']." ".$_SESSION['apellido_alumno']; ?>
+         </span>
+
+          <a href="logout.php" class="btn btn-outline-light btn-sm">
+             Cerrar sesión
+         </a>
+</div>
       </div>
     </div>
   </div>
@@ -83,9 +93,10 @@ $totalAsistencias = $filaAsistencias['total'];
                 <h1>¡Hola, <span><?php echo $datosAlumno['nombre']; ?>!</span></h1>
                 <p class="texto-panel">Este es tu espacio personal para vivir tu pasión por la danza.</p>
 
-                <a href="disciplinas_panel.php" class="btn boton-rosa">
-                    Inscribirme a nuevas clases →
+                <a href="disciplinas_panel.php?ver_horarios=1" class="btn-horarios">
+                 Inscribirme a nuevas clases →
                 </a>
+
             </div>
 
             <div class="col-md-6 text-center">

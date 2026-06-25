@@ -41,6 +41,8 @@ $resultado = mysqli_query($conexion,$sql);
     <th>Nombre</th>
     <th>Apellido</th>
     <th>Teléfono</th>
+    <th>Email</th>
+    <th>Password</th>
     <th>Acciones</th>
 </tr>
 
@@ -52,6 +54,8 @@ $resultado = mysqli_query($conexion,$sql);
     <td><?php echo $fila['nombre']; ?></td>
     <td><?php echo $fila['apellido']; ?></td>
     <td><?php echo $fila['telefono']; ?></td>
+    <td><?php echo $fila['email']; ?></td>
+    <td><?php echo $fila['password']; ?></td>
 
     <td>
 

@@ -6,18 +6,17 @@ $tabla = $_POST['tabla'];
 
 if($tabla == "alumnos") { 
 
-$id_alumno = $_POST ['id_alumno'];
-$nombre = $_POST ['nombre'];
-$apellido = $_POST ['apellido'];
-$numero_documento = $_POST ['numero_documento'];
-$telefono = $_POST ['telefono'];
-$email = $_POST ['email'];
-$fecha_nacimiento = $_POST ['fecha_nacimiento'];
-$id_tipo_documento = $_POST ['id_tipo_documento'];
-$password = $_POST ['password'];
-$id_pack = $_POST ['id_pack'];
+$id_alumno = $_POST['id_alumno'];
+$nombre = $_POST['nombre'];
+$apellido = $_POST['apellido'];
+$numero_documento = $_POST['numero_documento'];
+$telefono = $_POST['telefono'];
+$email = $_POST['email'];
+$fecha_nacimiento = $_POST['fecha_nacimiento'];
+$id_tipo_documento = $_POST['id_tipo_documento'];
+$password = $_POST['password'];
 
-$sql = "UPDATE alumnos 
+$sql = "UPDATE alumnos
 SET nombre='$nombre',
 apellido='$apellido',
 numero_documento='$numero_documento',
@@ -25,14 +24,14 @@ telefono='$telefono',
 email='$email',
 fecha_nacimiento='$fecha_nacimiento',
 id_tipo_documento='$id_tipo_documento',
-password='$password',
-id_pack='$id_pack'
+password='$password'
 WHERE id_alumno='$id_alumno'";
 
 mysqli_query($conexion,$sql);
 
-header("Location:index.php");
+header("Location:alumnos_abm.php");
 exit();
+
 
 }
 
@@ -51,7 +50,7 @@ WHERE id_profesor='$id_profesor'";
 
 mysqli_query($conexion, $sql);
 
-header("Location:profesores.php");
+header("Location:profesores_abm.php");
 exit();
 
 }
@@ -71,7 +70,7 @@ WHERE id_pack='$id_pack'";
 
 mysqli_query($conexion, $sql);
 
-header("Location:packs.php");
+header("Location:packs_abm.php");
 exit();
 
 }
@@ -176,13 +175,77 @@ exit();
 
 }
 
+if($tabla=="tipos_documento"){
 
+$id_tipo_documento=$_POST['id_tipo_documento'];
+$nombre_documento=$_POST['nombre_documento'];
 
+$sql="UPDATE tipos_documento
+SET nombre_documento='$nombre_documento'
+WHERE id_tipo_documento='$id_tipo_documento'";
 
+mysqli_query($conexion,$sql);
 
+header("Location:tipos_documento_abm.php");
+exit();
+}
 
+if($tabla=="dias_semanas"){
 
+    $id_dia=$_POST['id_dia'];
+    $nombre_dia=$_POST['nombre_dia'];
 
+    $sql="UPDATE dias_semanas
+    SET nombre_dia='$nombre_dia'
+    WHERE id_dia='$id_dia'";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:dias_semanas_abm.php");
+    exit();
+}
+
+if($tabla=="productos"){
+
+    $id_producto=$_POST['id_producto'];
+    $nombre_producto=$_POST['nombre_producto'];
+    $descripcion=$_POST['descripcion'];
+    $stock=$_POST['stock'];
+    $imagen=$_POST['imagen'];
+    $precio=$_POST['precio'];
+
+    $sql="UPDATE productos
+    SET nombre_producto='$nombre_producto',
+        descripcion='$descripcion',
+        stock='$stock',
+        imagen='$imagen',
+        precio='$precio'
+    WHERE id_producto='$id_producto'";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:productos_abm.php");
+    exit();
+}
+
+if($tabla=="categorias_disciplinas"){
+
+    $idcategorias_disciplinas=$_POST['idcategorias_disciplinas'];
+    $nombrecategoria=$_POST['nombrecategoria'];
+    $imagen_url=$_POST['imagen_url'];
+    $descripcion=$_POST['descripcion'];
+
+    $sql="UPDATE categorias_disciplinas
+    SET nombrecategoria='$nombrecategoria',
+        imagen_url='$imagen_url',
+        descripcion='$descripcion'
+    WHERE idcategorias_disciplinas='$idcategorias_disciplinas'";
+
+    mysqli_query($conexion,$sql);
+
+    header("Location:categorias_disciplinas_abm.php");
+    exit();
+}
 
 
 
