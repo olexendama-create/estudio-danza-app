@@ -65,20 +65,28 @@ $totalAsistencias = $filaAsistencias['total'];
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" style="color: #F2F1ED;" href="index.html">Inicio</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
+        <a class="nav-link active" style="color: #F2F1ED;" href="index.php">Inicio</a>
+        <?php if(isset($_SESSION['id_alumno'])){ ?>
+          <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="panel_alumno.php">Mi Panel</a>
+            <?php }else{ ?>
+          <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
+        <?php } ?>
         <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
-        <a class="nav-link"style="color: #F2F1ED;"  href="profesores.html">Profesores</a>
+        <a class="nav-link"style="color: #F2F1ED;"  href="profesores.php">Profesores</a>
         <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
-        <div class="d-flex align-items-center ms-auto">
-         <span class="badge rounded-pill px-3 py-2 me-4"
-           style="background:#ff8ec7;color:#000;">
-          👤 <?php echo $_SESSION['nombre_alumno']." ".$_SESSION['apellido_alumno']; ?>
+        
+        <?php if(isset($_SESSION['nombre_alumno'])){ ?>
+         <span class="navbar-text ms-4" style="color:#F4C9D6; font-weight:bold;">
+          <i class="bi bi-person-circle"></i>
+          <?= $_SESSION['nombre_alumno']; ?>
+          <?= $_SESSION['apellido_alumno']; ?>
          </span>
 
-          <a href="logout.php" class="btn btn-outline-light btn-sm">
-             Cerrar sesión
+        <a href="cerrar_sesion.php" class="btn btn-outline-light ms-3">
+           Cerrar sesión
          </a>
+       <?php } ?>
+
 </div>
       </div>
     </div>
