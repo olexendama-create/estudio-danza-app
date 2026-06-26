@@ -3,7 +3,7 @@ session_start();
 include("conexion.php");
 
 if(!isset($_SESSION['id_alumno'])){
-    header("Location: login.php");
+    header("Location: tienda.php?login=1");
     exit();
 }
 

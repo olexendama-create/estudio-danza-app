@@ -4,6 +4,14 @@ include("conexion.php");
 
 $sql = "SELECT * FROM productos";
 $resultado = mysqli_query($conexion, $sql);
+
+$sqlTalles = "SELECT * FROM talles";
+$resultadoTalles = mysqli_query($conexion, $sqlTalles);
+
+$talles = [];
+while($talle = mysqli_fetch_assoc($resultadoTalles)){
+    $talles[] = $talle;
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +33,8 @@ $resultado = mysqli_query($conexion, $sql);
 :root{
     --negro:#111111;
     --rosa:#F4C9D6;
-    --rosa-fuerte:#E86B98;
+
+    
     --fondo:#F6F4EE;
     --blanco:#FFFFFF;
     --texto:#2E2723;
@@ -52,7 +61,7 @@ body{
     margin:30px auto;
 }
 
-/* HERO ESTILO REFERENCIA */
+
 
 .hero-shop{
     display:grid;
@@ -101,9 +110,20 @@ body{
 }
 
 .mini-info a{
-    color:var(--rosa-fuerte);
+    color: #F4C9D6;
     text-decoration:none;
     font-weight:800;
+}
+
+.modal-content{
+    border:none;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.modal-backdrop.show{
+    opacity:.75;
 }
 
 .hero-text{
@@ -118,7 +138,7 @@ body{
 }
 
 .hero-text small{
-    color:var(--rosa-fuerte);
+    color: #F4C9D6;
     font-weight:900;
     letter-spacing:2px;
 }
@@ -132,7 +152,7 @@ body{
 }
 
 .hero-text h1 span{
-    color:var(--rosa-fuerte);
+    color: #F4C9D6;
 }
 
 .hero-text p{
@@ -154,7 +174,7 @@ body{
 }
 
 .btn-negro:hover{
-    background:var(--rosa-fuerte);
+    background: #F4C9D6;
     color:white;
 }
 
@@ -221,7 +241,7 @@ body{
 }
 
 .promo-shop span{
-    color:var(--rosa-fuerte);
+    color: #F4C9D6;
 }
 
 /* TITULO PRODUCTOS */
@@ -238,118 +258,111 @@ body{
 
 .productos{
     display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    align-items:start;
-    gap:22px;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:28px;
+    margin-top:25px;
 }
 
 .card-productos{
     background:#fff;
     border-radius:28px;
-    padding:18px;
-    overflow:visible;
-    box-shadow:0 12px 30px rgba(0,0,0,0.08);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:.3s;
-    cursor:pointer;
-    height:auto;
-}
-
-.card-productos form{
-    margin-top:auto;
-}
-
-.card-productos select{
-    margin-top:10px;
-}
-
-.card-productos button{
-    margin-top:10px;
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    transition 3s;
 }
 
 .card-productos:hover{
-    transform:translateY(-8px);
+    transform:translateY(-7px);
 }
 
-.card-productos.destacado{
-    grid-column: span 2;
-}
-
-.card-productos img{
+.producto-img{
     width:100%;
-    height:150px;
-    object-fit:cover;
+    height:240px;
     border-radius:22px;
+    overflow:hidden;
     background:#f8e9ee;
 }
 
-.card-productos.destacado img{
-    height:360px;
+.producto-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.badge-nuevo{
+    display:inline-block;
+    background:#F4C9D6;
+    color:#2E2723;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:800;
+    margin:14px 0 8px;
 }
 
 .card-productos h3{
     font-family:'Anton', sans-serif;
     font-size:30px;
-    line-height:1;
-    color:#222;
-    margin:12px 0 5px;
-}
-
-.card-productos.destacado h3{
-    font-size:52px;
+    color:#111;
+    margin:5px 0;
 }
 
 .precio{
-    color:var(--rosa-fuerte);
+    color:#E86B98;
     font-weight:900;
-    font-size:24px;
-    margin-bottom:6px;
+    font-size:25px;
+    margin-bottom:12px;
 }
 
-.card-productos.destacado .precio{
-    font-size:34px;
-}
-
-.descripcion{
-    color:#666;
+.campo-producto label{
     font-size:13px;
-    line-height:1.4;
-    margin:0 0 8px;
+    font-weight:800;
+    margin-bottom:5px;
 }
 
-.card-productos.destacado .descripcion{
-    font-size:15px;
-    max-width:560px;
+.campo-producto select,
+.campo-producto input{
+    border-radius:14px;
+    padding:9px;
+    border:1px solid #ddd;
 }
 
-.stock,
-.talles{
-    font-size:13px;
-    font-weight:700;
-    color:#333;
+.botones-producto{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
 }
 
-.form-select{
-    border-radius:20px;
-    font-size:13px;
-    margin:8px 0;
-}
-
-.btn-carrito{
-    width:100%;
+.btn-agregar{
     border:none;
-    background:#111;
-    color:white;
-    border-radius:25px;
+    background:#F4C9D6;
+    color:#2E2723;
+    border-radius:18px;
     padding:11px;
     font-weight:900;
-    font-size:13px;
 }
 
-.btn-carrito:hover{
-    background:var(--rosa-fuerte);
+.btn-agregar:hover{
+    background:#E86B98;
+    color:white;
+}
+
+.btn-ver{
+    background:#111;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    border-radius:18px;
+    padding:11px;
+    font-weight:900;
+}
+
+
+
+.btn-ver:hover{
+    background:#333;
+    color:white;
 }
 
 /* BENEFICIOS */
@@ -372,7 +385,7 @@ body{
 }
 
 .beneficio i{
-    color:var(--rosa-fuerte);
+    color: #F4C9D6;
     font-size:28px;
 }
 
@@ -514,37 +527,71 @@ body{
     $contador = 0;
     ?>
 
-    <div class="productos">
+   <div class="productos">
 
-        <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
+<?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
 
-        <div class="card-productos <?php echo ($contador == 0) ? 'destacado' : ''; ?>"
-        onclick="window.location='producto.php?id=<?php echo $fila['id_producto'];?>'">
+    <div class="card-productos">
 
-            <div>
-                <img src="<?php echo $fila['imagen']; ?>">
-
-                <h3><?php echo $fila['nombre_producto']; ?></h3>
-
-                <div class="precio">
-                    $<?php echo number_format($fila['precio'],0,',','.'); ?>
-                </div>
-            </div>
-
+        <div class="producto-img">
+            <img src="<?php echo $fila['imagen']; ?>" alt="<?php echo $fila['nombre_producto']; ?>">
         </div>
 
-        <?php
-        $contador++;
-        }
-        ?>
+        <span class="badge-nuevo">Nuevo</span>
+
+        <h3><?php echo $fila['nombre_producto']; ?></h3>
+
+        <div class="precio">
+            $<?php echo number_format($fila['precio'],0,',','.'); ?>
+        </div>
+
+        <form action="agregar_carrito.php" method="POST">
+
+            <input type="hidden" name="id_producto" value="<?php echo $fila['id_producto']; ?>">
+
+            <div class="campo-producto mb-3">
+                <label>Talle</label>
+
+                <select name="id_talle" class="form-select" required>
+                    <option value="">Elegir talle</option>
+
+                    <?php foreach($talles as $talle){ ?>
+                        <option value="<?php echo $talle['id_talle']; ?>">
+                            <?php echo $talle['nombre_talle']; ?>
+                        </option>
+                    <?php } ?>
+
+                </select>
+            </div>
+
+            <div class="campo-producto mb-3">
+                <label>Cantidad</label>
+                <input type="number" name="cantidad" class="form-control" value="1" min="1" required>
+            </div>
+
+            <div class="botones-producto">
+
+                <button type="submit" class="btn-agregar">
+                    <i class="bi bi-cart-plus"></i> Agregar
+                </button>
+
+                <a href="producto.php?id=<?php echo $fila['id_producto']; ?>" class="btn-ver">
+                    Ver
+                </a>
+
+            </div>
+
+        </form>
 
     </div>
 
+<?php } ?>
+
+</div>
+
+
     <section class="beneficios">
-        <div class="beneficio">
-            <i class="bi bi-truck"></i>
-            <p>Envíos disponibles</p>
-        </div>
+
 
         <div class="beneficio">
             <i class="bi bi-credit-card"></i>
@@ -562,8 +609,93 @@ body{
         </div>
     </section>
 
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4">
+
+      <div class="modal-header border-0" style="background: #f4c9d6;">
+        <h4 class="modal-title fw-bold text-dark">
+            <i class="bi bi-person-heart me-2"></i>
+           Iniciar sesión
+        </h4>
+
+        <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal">
+        </button>
+      </div>
+
+      <div class="modal-body text-center py-4">
+
+      <i class=" bi bi-cart-x-fill"
+         style="font-size: 65px; color: #e86b98;"></i>
+
+         <h4 class=" mt-3 fw-bold">
+            Necesitas iniciar sesion
+         </h4>
+
+        <p class="text-secondary mb-2">
+        Para comprar productos de la tienda 
+        primero tenes que ingresar con tu cuenta
+        de alumno.
+        </p>
+
+        <small class="text-muted">
+            Todavia no sos alumno? <br>
+            Inscribite y vas a poder comprar,
+            reservar clases y acceder a tu panel.
+        </small>
+
+      </div>
+
+      <div class="modal-footer border-0 justify-content-center">
+
+        <a href="alumnos.php"
+        class="btn"
+        style="background: #111; color: white; border-radius:30px; padding: 10px 30px; font-weight: bold">
+          <i class="bi bi-box-arrow-in-right"></i>
+
+        Iniciar sesión
+
+        </a>
+
+        <a href="alumnos.php"
+        class="btn"
+        style="color: #e86b98; border:2px solid #f4c9d6; border-radius:30px; padding: 10px 30px; font-weight: bold">
+          <i class="bi bi-person-plus"></i>>
+
+         Inscribirme
+
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<?php if(isset($_GET['login'])){ ?>
+
+<script>
+
+window.onload=function(){
+
+var modal=new bootstrap.Modal(
+document.getElementById('loginModal')
+);
+
+modal.show();
+
+}
+
+</script>
+
+<?php } ?>
+
 </body>
 </html>

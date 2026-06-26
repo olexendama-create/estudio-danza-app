@@ -53,6 +53,113 @@ $totalAsistencias = $filaAsistencias['total'];
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <title>Panel Alumno</title>
+
+
+<style>
+    :root{
+        --fondo:#F6F4EE;
+    }
+
+.body{
+    background:var(--fondo) !important;
+}
+
+    .card-info{
+    background: linear-gradient(135deg, #ffffff 0%, #fdf8fa 45%, #f4c9d6 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+   transition: .3s;
+}
+
+.card-info:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.card-info p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-info h2{
+    font-size: 42px;
+    font-weight: 900;
+}
+
+.card-info span{
+    color: #555;
+}
+
+.mis-clases{
+     background: linear-gradient(135deg, #ffffff 0%, #fdf8fa 45%, #f4c9d6 100%);
+    margin-top: 50px;
+    padding-bottom: 70px;
+}
+
+.mis-clases h3{
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.clase-card{
+    background: white;
+    border-radius: 18px;
+    padding: 20px 25px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.clase-card h4{
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.clase-card p{
+    margin: 0;
+    color: #555;
+}
+
+.clase-card span{
+    font-size: 36px;
+    color: #f4c2f7;
+}
+
+.frase-card{
+
+    background: white;
+    border-radius: 22px;
+    padding: 45px;
+    min-height: 390px;
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("https://i.ibb.co/fVGYvHNd/descarga-9.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.frase-card h2{
+    font-size: 34px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.frase-card h2 span{
+    color: #f4c2f7;
+}
+
+.hero-title{
+    font-family: "Anton", sans-serif;
+}
+
+
+
+</style>
+
    
 </head>
 <body class="panel_alumno">
@@ -101,7 +208,7 @@ $totalAsistencias = $filaAsistencias['total'];
                 <h1>¡Hola, <span><?php echo $datosAlumno['nombre']; ?>!</span></h1>
                 <p class="texto-panel">Este es tu espacio personal para vivir tu pasión por la danza.</p>
 
-                <a href="disciplinas_panel.php?ver_horarios=1" class="btn-horarios">
+                <a href="disciplinas_panel.php?ver_horarios=1#calendario" class="btn-horarios">
                  Inscribirme a nuevas clases →
                 </a>
 
@@ -205,7 +312,7 @@ $materiales = mysqli_query($conexion, $sqlMaterial);
             <small><?php echo $mat['descripcion']; ?></small>
         </div>
 
-        <a href="<?php echo $mat['archivo']; ?>" target="_blank" class="btn boton-rosa">
+        <a href="./<?php echo $mat['archivo']; ?>" target="_blank" class="btn boton-rosa">
             Ver material
         </a>
     </div>

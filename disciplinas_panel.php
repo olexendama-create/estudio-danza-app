@@ -232,7 +232,7 @@ $resultado = mysqli_query($conexion,$sql);
 <?php if(isset($_GET['ver_horarios'])) { ?>
 
 
-<div class="modal-horarios">
+<div class="modal-horarios" id="calendario">
      <div class="contenido-modal calendario-modal">
 
      <a href="disciplinas_panel.php" class="cerrar-modal">x</a>
