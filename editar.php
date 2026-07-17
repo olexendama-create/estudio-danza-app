@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include("conexion.php");
 
 $id = $_GET['id'];
@@ -117,6 +120,14 @@ if($tabla == "profesores"){
     <input type="number"
            name="telefono"
            value="<?php echo $profesor['telefono']; ?>">
+
+    <input type="text"
+           name="email"
+           value="<?php echo $profesor['email']; ?>">     
+           
+    <input type="number"
+           name="password"
+           value="<?php echo $profesor['password']; ?>">
 
     <button type="submit">Actualizar</button>
 
@@ -599,18 +610,302 @@ value="<?php echo $categoria['descripcion']; ?>">
 
 <?php
 }
+
+
+else if($tabla == "ventas"){
+
+    $sql = "SELECT * FROM ventas
+            WHERE id_venta='$id'";
+
+    $resultado = mysqli_query($conexion, $sql);
+
+    if(!$resultado){
+        die("Error al buscar la venta: " . mysqli_error($conexion));
+    }
+
+    $venta = mysqli_fetch_assoc($resultado);
+
+    if(!$venta){
+        die("No se encontró la venta");
+    }
+
+    $sql_alumnos = "SELECT id_alumno, nombre, apellido
+                    FROM alumnos
+                    ORDER BY nombre, apellido";
+
+    $resultado_alumnos = mysqli_query($conexion, $sql_alumnos);
+
+    if(!$resultado_alumnos){
+        die("Error al buscar alumnos: " . mysqli_error($conexion));
+    }
+
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Venta</title>
+</head>
+
+<body>
+
+<h1>Editar Venta</h1>
+
+<form action="actualizar.php" method="POST">
+
+    <input type="hidden" name="tabla" value="ventas">
+
+    <input
+        type="hidden"
+        name="id_venta"
+        value="<?php echo $venta['id_venta']; ?>"
+    >
+
+    <label>Alumno:</label>
+
+    <select name="id_alumno" required>
+
+        <option value="">Seleccione un alumno</option>
+
+        <?php while($alumno = mysqli_fetch_assoc($resultado_alumnos)){ ?>
+
+            <option
+                value="<?php echo $alumno['id_alumno']; ?>"
+
+                <?php
+                if($alumno['id_alumno'] == $venta['id_alumno']){
+                    echo "selected";
+                }
+                ?>
+            >
+
+                <?php
+                echo $alumno['nombre'] . " " . $alumno['apellido'];
+                ?>
+
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <br><br>
+
+    <label>Fecha de venta:</label>
+
+    <input
+        type="datetime-local"
+        name="fecha_venta"
+        value="<?php echo date('Y-m-d\TH:i', strtotime($venta['fecha_venta'])); ?>"
+        required
+    >
+
+    <br><br>
+
+    <label>Método de pago:</label>
+
+    <select name="metodo_pago" required>
+
+        <option value="">Seleccione un método</option>
+
+        <option
+            value="Efectivo"
+            <?php if($venta['metodo_pago'] == "Efectivo") echo "selected"; ?>
+        >
+            Efectivo
+        </option>
+
+        <option
+            value="Transferencia"
+            <?php if($venta['metodo_pago'] == "Transferencia") echo "selected"; ?>
+        >
+            Transferencia
+        </option>
+
+        <option
+            value="Tarjeta"
+            <?php if($venta['metodo_pago'] == "Tarjeta") echo "selected"; ?>
+        >
+            Tarjeta
+        </option>
+
+        <option
+            value="Mercado Pago"
+            <?php if($venta['metodo_pago'] == "Mercado Pago") echo "selected"; ?>
+        >
+            Mercado Pago
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Actualizar Venta
+    </button>
+
+</form>
+
+</body>
+</html>
+
+<?php
+
+}
 
 
 
+else if($tabla == "carrito"){
 
+    $sql = "SELECT * FROM carrito
+            WHERE id_carrito='$id'";
 
+    $resultado = mysqli_query($conexion, $sql);
 
+    if(!$resultado){
+        die("Error al buscar carrito: " . mysqli_error($conexion));
+    }
+
+    $carrito = mysqli_fetch_assoc($resultado);
+
+    if(!$carrito){
+        die("El carrito no existe");
+    }
+
+    $sql_alumnos = "SELECT id_alumno, nombre, apellido
+                    FROM alumnos
+                    ORDER BY nombre, apellido";
+
+    $resultado_alumnos = mysqli_query(
+        $conexion,
+        $sql_alumnos
+    );
+
+    if(!$resultado_alumnos){
+        die("Error al consultar alumnos: " . mysqli_error($conexion));
+    }
 
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Editar Carrito</title>
+
+</head>
+
+<body>
+
+<h1>Editar Carrito</h1>
+
+<form action="actualizar.php" method="POST">
+
+    <input
+        type="hidden"
+        name="tabla"
+        value="carrito"
+    >
+
+    <input
+        type="hidden"
+        name="id_carrito"
+        value="<?php echo $carrito['id_carrito']; ?>"
+    >
+
+    <label>Alumno:</label>
+
+    <select name="id_alumno" required>
+
+        <?php while($alumno = mysqli_fetch_assoc($resultado_alumnos)){ ?>
+
+            <option
+                value="<?php echo $alumno['id_alumno']; ?>"
+
+                <?php
+                if($alumno['id_alumno'] == $carrito['id_alumno']){
+                    echo "selected";
+                }
+                ?>
+            >
+
+                <?php
+                echo htmlspecialchars(
+                    $alumno['nombre'] . " " . $alumno['apellido']
+                );
+                ?>
+
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <br><br>
+
+    <label>Fecha:</label>
+
+    <input
+        type="datetime-local"
+        name="fecha"
+        value="<?php
+            echo date(
+                'Y-m-d\TH:i',
+                strtotime($carrito['fecha'])
+            );
+        ?>"
+        required
+    >
+
+    <br><br>
+
+    <label>Estado:</label>
+
+    <select name="estado" required>
+
+        <option
+            value="pendiente"
+            <?php
+            if($carrito['estado'] == "pendiente"){
+                echo "selected";
+            }
+            ?>
+        >
+            Pendiente
+        </option>
+
+        <option
+            value="finalizado"
+            <?php
+            if($carrito['estado'] == "finalizado"){
+                echo "selected";
+            }
+            ?>
+        >
+            Finalizado
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Actualizar Carrito
+    </button>
+
+</form>
+
+</body>
+
+</html>
+
+<?php
+}
 
 
 

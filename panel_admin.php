@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["id_admin"])) {
+    header("Location: alumno.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +16,11 @@
 <body>
 
 <h1>ABM Tablas del Sistema</h1>
+
+<p>
+    Administradores:
+    <?php echo htmlspecialchars($_SESSION["usuario_admin"]); ?>
+</p>
 
 <a href="alumnos_abm.php">
     <button>Alumnos</button>
@@ -53,6 +68,14 @@
 
 <a href="categorias_disciplinas_abm.php">
     <button>Categorias-Disciplinas</button>
+</a>
+
+<a href="ventas_abm.php">
+    <button>Ventas</button>
+</a>
+
+<a href="carrito_abm.php">
+    <button>Carrito</button>
 </a>
 
 <br><br>

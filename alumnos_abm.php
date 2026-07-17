@@ -48,6 +48,7 @@ $resultado = mysqli_query($conexion,$sql);
     <th>Email</th>
     <th>Fecha de Nacimiento</th>
     <th>Tipo Doc</th>
+    <th>Contraseña</th>
 </tr>
 
 <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>

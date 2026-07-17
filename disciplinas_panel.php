@@ -1,417 +1,1773 @@
-<?php 
+<?php
 session_start();
 
 include("conexion.php");
 
 $sql = "SELECT * FROM categorias_disciplinas";
-$resultado = mysqli_query($conexion,$sql);
+$resultado = mysqli_query($conexion, $sql);
 
-?> 
+if(!$resultado){
+    die("Error al cargar las disciplinas: " . mysqli_error($conexion));
+}
+?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="style.css?v=1.5">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Disciplinas y Horarios</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css?v=1.7"
+    >
+
+    <style>
+
+        :root{
+            --rosa:#f4c9d6;
+            --rosa-fuerte:#e86b98;
+            --negro:#111111;
+            --crema:#f8f4ef;
+            --blanco:#ffffff;
+            --gris:#666666;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            margin:0;
+            background:var(--crema);
+            color:#222;
+            font-family:"Montserrat", sans-serif;
+        }
+
+       
+
+        .hero-disciplinas{
+            position:relative;
+            overflow:hidden;
+            padding:135px 60px 85px;
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(244,201,214,.55),
+                    transparent 26%
+                ),
+                var(--crema);
+        }
+
+        .hero-disciplinas::before{
+            content:"";
+            position:absolute;
+            width:270px;
+            height:270px;
+            left:-120px;
+            bottom:-150px;
+            border-radius:50%;
+            background:rgba(244,201,214,.28);
+        }
+
+        .hero-contenido{
+            width:100%;
+            max-width:1350px;
+            display:grid;
+            grid-template-columns:.85fr 1.15fr;
+            align-items:center;
+            gap:55px;
+            position:relative;
+            z-index:1;
+            margin:auto;
+        }
+
+        .hero-texto{
+            position:relative;
+        }
+
+        .hero-etiqueta{
+            display:inline-flex;
+            align-items:center;
+            gap:9px;
+            margin:0 0 18px;
+            color:var(--rosa-fuerte);
+            font-size:12px;
+            font-weight:900;
+            letter-spacing:3px;
+            text-transform:uppercase;
+        }
+
+        .hero-etiqueta::before{
+            content:"";
+            width:40px;
+            height:3px;
+            border-radius:20px;
+            background:var(--rosa-fuerte);
+        }
+
+        .hero-titulo{
+            margin:0 0 25px;
+            color:var(--negro);
+            font-family:"Anton", sans-serif;
+            font-size:78px;
+            font-weight:400;
+            line-height:.94;
+            letter-spacing:.5px;
+        }
+
+        .hero-titulo span{
+            color:var(--rosa-fuerte);
+        }
+
+        .hero-descripcion{
+            max-width:520px;
+            margin:0 0 32px;
+            color:#5e5a57;
+            font-size:17px;
+            line-height:1.8;
+        }
+
+        .btn-horarios{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:9px;
+            padding:14px 28px;
+            border-radius:30px;
+            background:var(--negro);
+            color:white;
+            font-size:14px;
+            font-weight:900;
+            text-decoration:none;
+            box-shadow:0 10px 25px rgba(0,0,0,.16);
+            transition:.3s;
+        }
+
+        .btn-horarios:hover{
+            background:var(--rosa-fuerte);
+            color:white;
+            transform:translateY(-3px);
+            box-shadow:0 15px 30px rgba(232,107,152,.28);
+        }
+
+        .hero-video-contenedor{
+            position:relative;
+            padding:12px;
+            border-radius:33px;
+            background:white;
+            box-shadow:0 18px 50px rgba(0,0,0,.13);
+        }
+
+        .hero-video-contenedor::before{
+            content:"";
+            position:absolute;
+            width:110px;
+            height:110px;
+            top:-25px;
+            right:-25px;
+            z-index:-1;
+            border-radius:50%;
+            background:var(--rosa);
+        }
+
+        .hero-video{
+            width:100%;
+            height:430px;
+            display:block;
+            border-radius:25px;
+            object-fit:cover;
+            background:#111;
+        }
+
+        .video-etiqueta{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            position:absolute;
+            left:30px;
+            bottom:30px;
+            padding:13px 20px;
+            border-radius:30px;
+            background:rgba(255,255,255,.91);
+            color:#111;
+            font-size:13px;
+            font-weight:900;
+            backdrop-filter:blur(7px);
+            box-shadow:0 8px 25px rgba(0,0,0,.15);
+        }
+
+        .video-etiqueta i{
+            color:var(--rosa-fuerte);
+            font-size:20px;
+        }
+
+        
+
+        .seccion-disciplinas{
+            padding:75px 60px 95px;
+            background:
+                radial-gradient(#ebe6df 20%, transparent 20%);
+            background-size:45px 45px;
+            background-color:var(--crema);
+        }
+
+        .contenedor-disciplinas{
+            width:100%;
+            max-width:1250px;
+            margin:auto;
+        }
+
+        .encabezado-disciplinas{
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-end;
+            gap:30px;
+            margin-bottom:35px;
+        }
+
+        .encabezado-disciplinas small{
+            display:block;
+            margin-bottom:8px;
+            color:var(--rosa-fuerte);
+            font-size:12px;
+            font-weight:900;
+            letter-spacing:3px;
+        }
+
+        .encabezado-disciplinas h2{
+            margin:0;
+            color:var(--negro);
+            font-family:"Anton", sans-serif;
+            font-size:52px;
+            font-weight:400;
+            text-transform:uppercase;
+        }
+
+        .encabezado-disciplinas h2 span{
+            color:var(--rosa-fuerte);
+        }
+
+        .encabezado-disciplinas p{
+            max-width:480px;
+            margin:0;
+            color:#666;
+            font-size:14px;
+            line-height:1.7;
+        }
+
+        .grilla-disciplinas{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:24px;
+        }
+
+        .card-disciplina{
+            display:flex;
+            flex-direction:column;
+            position:relative;
+            overflow:hidden;
+            border:1px solid #eee8e0;
+            border-radius:28px;
+            background:white;
+            box-shadow:0 12px 32px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+
+        .card-disciplina::after{
+            content:"";
+            position:absolute;
+            width:120px;
+            height:120px;
+            top:-60px;
+            right:-60px;
+            border-radius:50%;
+            background:rgba(244,201,214,.35);
+            pointer-events:none;
+        }
+
+        .card-disciplina:hover{
+            transform:translateY(-8px);
+            border-color:var(--rosa);
+            box-shadow:0 20px 42px rgba(0,0,0,.13);
+        }
+
+        .contenedor-img-disciplina{
+            height:260px;
+            overflow:hidden;
+            background:#f4e4e9;
+        }
+
+        .img-disciplina{
+            width:100%;
+            height:100%;
+            display:block;
+            object-fit:cover;
+            transition:.45s;
+        }
+
+        .card-disciplina:hover .img-disciplina{
+            transform:scale(1.06);
+        }
+
+        .info-disciplina{
+            display:flex;
+            flex-direction:column;
+            flex:1;
+            padding:25px;
+        }
+
+        .tag-disciplina{
+            display:inline-block;
+            width:max-content;
+            margin-bottom:10px;
+            padding:6px 13px;
+            border-radius:20px;
+            background:#fdf0f5;
+            color:var(--rosa-fuerte);
+            font-size:10px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            text-transform:uppercase;
+        }
+
+        .info-disciplina h3{
+            margin:0 0 12px;
+            color:var(--negro);
+            font-family:"Anton", sans-serif;
+            font-size:29px;
+            font-weight:400;
+        }
+
+        .info-disciplina p{
+            margin:0;
+            color:#666;
+            font-size:13px;
+            line-height:1.7;
+        }
+
+        
+
+        .modal-horarios{
+            position:fixed;
+            z-index:9999;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            padding:25px;
+            overflow:auto;
+            background:rgba(0,0,0,.70);
+        }
+
+        .contenido-modal{
+            width:95%;
+            max-width:1250px;
+            position:relative;
+            margin:25px auto;
+            padding:30px;
+            border-radius:25px;
+            background:#292929;
+            box-shadow:0 20px 60px rgba(0,0,0,.45);
+        }
+
+        .calendario-modal{
+            color:white;
+        }
+
+        .cerrar-modal{
+            width:40px;
+            height:40px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            position:absolute;
+            top:18px;
+            right:18px;
+            border-radius:50%;
+            background:white;
+            color:#111;
+            font-size:20px;
+            font-weight:900;
+            text-decoration:none;
+        }
+
+        .cerrar-modal:hover{
+            background:#f4c2f7;
+            color:#111;
+        }
+
+        .titulo{
+            margin:0 50px 5px;
+            color:white;
+            font-family:"Anton", sans-serif;
+            font-size:35px;
+            text-align:center;
+        }
+
+        .subtitulo-modal{
+            margin-bottom:25px;
+            color:#f4c2f7;
+            text-align:center;
+        }
+
+        .calendarios{
+            display:grid;
+            grid-template-columns:90px repeat(6,1fr);
+            gap:8px;
+            overflow-x:auto;
+        }
+
+        .celda{
+            min-width:120px;
+            min-height:78px;
+            padding:10px;
+            border-radius:15px;
+            color:#222;
+            font-size:13px;
+        }
+
+        .encabezado{
+            min-height:55px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#f4c2f7;
+            color:#222;
+            font-weight:900;
+            text-align:center;
+        }
+
+        .hora{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-width:90px;
+            background:rgba(255,255,255,.22);
+            color:white;
+            font-weight:900;
+        }
+
+        .clase{
+            border:3px solid transparent;
+            font-weight:800;
+            cursor:pointer;
+            box-shadow:0 6px 15px rgba(0,0,0,.18);
+            transition:.2s;
+        }
+
+        .clase:hover{
+            transform:scale(1.02);
+        }
+
+        .clase span{
+            display:block;
+            margin-top:5px;
+            font-size:11px;
+            font-weight:500;
+        }
+
+        .clase.seleccionada{
+            border-color:white;
+            background:green !important;
+            color:white !important;
+        }
+
+        .vacia{
+            background:rgba(255,255,255,.08);
+        }
+
+        .clasica{
+            background:#ffd6e8;
+        }
+
+        .reggaeton{
+            background:#ffc2f2;
+        }
+
+        .tap{
+            background:#d9c2ff;
+        }
+
+        .latinos{
+            background:#ffe0a8;
+        }
+
+        .arabe{
+            background:#ffe7a8;
+        }
+
+        .urbano{
+            background:#c9d6ff;
+        }
+
+        .femme{
+            background:#ffb3d9;
+        }
+
+        .contemporaneo{
+            background:#c7f0ff;
+        }
+
+        .heels{
+            background:#ff9ecb;
+        }
+
+        .zona-inscripcion{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            margin-top:28px;
+        }
+
+        .btn-inscribirse{
+            min-width:220px;
+            padding:14px 35px;
+            border:none;
+            border-radius:30px;
+            background:#f4c2f7;
+            color:#222;
+            font-size:16px;
+            font-weight:900;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn-inscribirse:hover{
+            background:white;
+            transform:translateY(-2px);
+        }
+
+        .texto-seleccion{
+            margin:12px 0 0;
+            color:#ddd;
+            font-size:13px;
+            text-align:center;
+        }
+
+       
+
+        .mensaje-fondo{
+            display:none;
+            align-items:center;
+            justify-content:center;
+            position:fixed;
+            z-index:20000;
+            inset:0;
+            padding:20px;
+            background:rgba(0,0,0,.78);
+            backdrop-filter:blur(7px);
+        }
+
+        .mensaje-fondo.visible{
+            display:flex;
+        }
+
+        .mensaje-caja{
+            width:100%;
+            max-width:470px;
+            overflow:hidden;
+            border-radius:30px;
+            background:white;
+            box-shadow:0 25px 75px rgba(0,0,0,.40);
+            animation:mostrarMensaje .25s ease;
+        }
+
+        @keyframes mostrarMensaje{
+
+            from{
+                opacity:0;
+                transform:translateY(15px) scale(.94);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0) scale(1);
+            }
+        }
+
+        .mensaje-header{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:20px 24px;
+            background:linear-gradient(135deg,#f4c9d6,#eca9c2);
+        }
+
+        .mensaje-header h3{
+            margin:0;
+            color:#111;
+            font-family:"Anton", sans-serif;
+            font-size:27px;
+            font-weight:400;
+        }
+
+        .cerrar-mensaje{
+            border:none;
+            background:transparent;
+            color:#111;
+            font-size:28px;
+            font-weight:900;
+            cursor:pointer;
+        }
+
+        .mensaje-contenido{
+            padding:37px 30px 25px;
+            text-align:center;
+        }
+
+        .icono-mensaje{
+            width:86px;
+            height:86px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin:auto;
+            border-radius:50%;
+            background:#fff0f5;
+            color:var(--rosa-fuerte);
+            font-size:45px;
+        }
+
+        .mensaje-contenido h4{
+            margin:19px 0 10px;
+            color:#111;
+            font-size:23px;
+            font-weight:900;
+        }
+
+        .mensaje-contenido p{
+            margin:0;
+            color:#666;
+            font-size:14px;
+            line-height:1.7;
+        }
+
+        .mensaje-botones{
+            display:flex;
+            justify-content:center;
+            gap:10px;
+            padding:0 26px 30px;
+        }
+
+        .mensaje-botones a,
+        .mensaje-botones button{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            padding:12px 21px;
+            border-radius:27px;
+            font-size:13px;
+            font-weight:900;
+            text-decoration:none;
+            transition:.3s;
+            cursor:pointer;
+        }
+
+        .btn-iniciar-sesion{
+            border:none;
+            background:#111;
+            color:white;
+        }
+
+        .btn-iniciar-sesion:hover{
+            background:var(--rosa-fuerte);
+            color:white;
+        }
+
+        .btn-seguir-viendo{
+            border:2px solid var(--rosa);
+            background:white;
+            color:var(--rosa-fuerte);
+        }
+
+        .btn-seguir-viendo:hover{
+            background:var(--rosa);
+            color:#111;
+        }
+
+        
+
+        .footer-pagina{
+            padding:42px 20px 25px;
+            background:#111;
+            color:white;
+            text-align:center;
+        }
+
+        .footer-pagina h3{
+            margin:0 0 9px;
+            color:var(--rosa);
+            font-family:"Anton", sans-serif;
+            font-size:27px;
+            font-weight:400;
+        }
+
+        .footer-pagina p{
+            margin:0 0 18px;
+            color:#ccc;
+            font-size:13px;
+        }
+
+        .footer-redes{
+            display:flex;
+            justify-content:center;
+            gap:12px;
+            flex-wrap:wrap;
+            margin-bottom:25px;
+        }
+
+        .footer-redes a{
+            padding:9px 18px;
+            border:1px solid rgba(255,255,255,.25);
+            border-radius:25px;
+            color:white;
+            text-decoration:none;
+            font-size:13px;
+            transition:.3s;
+        }
+
+        .footer-redes a:hover{
+            border-color:var(--rosa);
+            background:var(--rosa);
+            color:#111;
+        }
+
+        .copyright{
+            padding-top:20px;
+            border-top:1px solid rgba(255,255,255,.12);
+            color:#999;
+            font-size:12px;
+        }
+
+         #mainNavbar {
+            background: rgba(17, 17, 17, .92);
+            backdrop-filter: blur(10px);
+            transition: .3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+        }
+
+        #mainNavbar.nav-colored {
+            background: #111111;
+        }
+
+        .navbar-brand {
+            color: var(--rosa) !important;
+            font-family: "Anton", sans-serif;
+            font-size: 25px;
+            letter-spacing: 1px;
+        }
+
+        .navbar-toggler {
+            background: var(--rosa);
+            border: none;
+        }
+
+        .nav-link {
+            color: #f2f1ed !important;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 9px 14px !important;
+            border-radius: 25px;
+            margin: 2px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(244, 201, 214, .18);
+        }
+
+        .nav-destacado {
+            background: var(--rosa);
+            color: var(--negro) !important;
+        }
+
+        .nav-destacado:hover {
+            background: var(--rosa-fuerte);
+            color: white !important;
+        }
+
+        .usuario-navbar {
+            color: var(--rosa);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .btn-sesion {
+            border: 1px solid white;
+            color: white;
+            border-radius: 25px;
+            padding: 7px 15px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .btn-sesion:hover {
+            background: var(--rosa);
+            border-color: var(--rosa);
+            color: var(--negro);
+        }
+
+
+        @media(max-width:1050px){
+
+            .hero-contenido{
+                grid-template-columns:1fr;
+            }
+
+            .hero-video-contenedor{
+                width:100%;
+            }
+
+            .grilla-disciplinas{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+        @media(max-width:700px){
+
+            .hero-disciplinas{
+                padding:115px 20px 55px;
+            }
+
+            .hero-titulo{
+                font-size:54px;
+            }
+
+            .hero-video{
+                height:300px;
+            }
+
+            .seccion-disciplinas{
+                padding:55px 20px 70px;
+            }
+
+            .encabezado-disciplinas{
+                align-items:flex-start;
+                flex-direction:column;
+            }
+
+            .encabezado-disciplinas h2{
+                font-size:43px;
+            }
+
+            .grilla-disciplinas{
+                grid-template-columns:1fr;
+            }
+
+            .modal-horarios{
+                padding:10px;
+            }
+
+            .contenido-modal{
+                width:100%;
+                padding:25px 15px;
+            }
+
+            .titulo{
+                margin-top:40px;
+                font-size:28px;
+            }
+
+            .mensaje-botones{
+                flex-direction:column;
+            }
+
+            .mensaje-botones a,
+            .mensaje-botones button{
+                width:100%;
+            }
+        }
+
+    </style>
+
 </head>
-<style>
-    .seccion-grilla-premium {
-    max-width: 1100px !important;
-    margin: 60px auto !important;
-    padding: 0 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 80px !important;
-    box-sizing: border-box !important;
-}
-
-.fila-premium {
-    display: flex !important;
-    flex-direction: row !important;
-    background-color: #ffffff !important;
-    border: 1px solid #eaeae8 !important;
-    overflow: hidden !important;
-    height: 400px !important;
-    width: 100% !important; 
-   box-sizing: border-box !important;
-}
-
-.fila-espejo {
-    flex-direction: row-reverse !important;
-}
-
-
-.bloque-informacion {
-    flex: 0 0 50% !important;
-    padding: 40px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-   box-sizing: border-box !important;
-}
-
-.categoria-tag {
-    font-family: sans-serif !important;
-    font-size: 11px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 2px !important;
-    color: #999 !important;
-    margin-bottom: 12px !important;
-}
-
-.titulo-disciplina {
-    font-family: "Playfair Display", serif !important;
-    font-size: 32px !important;
-    color-scheme: #111 !important;
-    margin: 0 0 20px 0 !important;
-    font-weight: 500 !important;
-}
-
-.detalles {
-    font-family: sans-serif !important;
-    font-size: 14px !important;
-    color: #555 !important;
-    margin: 0 0 8px 0 !important;
-}
-
-.detalles strong {
-    color: #111 !important;
-}
-
-.profesor {
-    font-family: Georgia, serif;
-    font-style: italic;
-    font-size: 15px !important;
-    color: #222 !important;
-    margin-top: 16px !important;
-}
-
-.bloque-video {
-    flex: 0 0 50% !important;
-    height: 100% !important;
-    position: relative !important;
-    background-color: #000 !important;
-    box-sizing: border-box !important;
-}
-
-.video-preview {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    opacity: 0.7 !important;
-    filter: grayscale(30%) !important;
-    transition: all 0.4s ease !important;
-}    
-</style>
-
-
-  <nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top py-3" style="background-color: #000;">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="#" style="color: #F4C9D6; letter-spacing: 1px;">Studio Gym Dance</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" style="color: #F2F1ED;" href="index.php">Inicio</a>
-        <?php if(isset($_SESSION['id_alumno'])){ ?>
-          <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="panel_alumno.php">Mi Panel</a>
-            <?php }else{ ?>
-          <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="alumnos.php">Alumnos</a>
-        <?php } ?>
-        <a class="nav-link"style="color: #F2F1ED;"  href="disciplinas_panel.php">Disciplinas y Horarios</a>
-        <a class="nav-link"style="color: #F2F1ED;"  href="profesores.php">Profesores</a>
-        <a class="nav-link" style="background-color: #F4C9D6; color: #3E2723; border-radius: 80%;" href="tienda.php">Tienda</a>
-      
-       <?php if(isset($_SESSION['nombre_alumno'])){ ?>
-         <span class="navbar-text ms-4" style="color:#F4C9D6; font-weight:bold;">
-          <i class="bi bi-person-circle"></i>
-          <?= $_SESSION['nombre_alumno']; ?>
-          <?= $_SESSION['apellido_alumno']; ?>
-         </span>
-
-        <a href="cerrar_sesion.php" class="btn btn-outline-light ms-3">
-           Cerrar sesión
-         </a>
-       <?php } ?>
-    
-    </div>
-    </div>
-  </div>
-</nav>
-
 
 <body>
-    
-<section style="padding: 80px 60px; background: #f8f4ef;">
-  <div style="display: flex; align-items: center; justify-content: space-between; gap: 50px; flex-wrap: nowrap;">
 
-  <div style="flex: 1; min-width: 35%;">
-    <p style="letter-spacing: 2px; text-transform: uppercase; color: #999;">Nuestras disciplinas</p>
+<nav
+    id="mainNavbar"
+    class="navbar navbar-expand-lg fixed-top py-3"
+>
+    <div class="container">
 
-    <h1 style="font-size: 70px; font-weight: 900; line-height: 1; margin-bottom: 20px; font-family: Anton , sans-serif;">
-        MOVETE. <br>
-        EXPRESA.<br>
-        <span style="color: #e8b4d8;">
-            VIVI.
-        </span>
-    </h1>
+        <a class="navbar-brand" href="index.php">
+            Studio Gym Dance
+        </a>
 
-    <P style="font-size: 18px; color: #555; margin-bottom: 30px;">
-        Explora todas nuestras disciplinas,
-        horarios y profesores.
-    </P>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <a href="disciplinas_panel.php?ver_horarios=1" class="btn-horarios">
-        Ver Horarios
-    </a>
+        <div
+            class="collapse navbar-collapse"
+            id="navbarNavAltMarkup"
+        >
 
-    </div>
+            <div class="navbar-nav ms-auto align-items-lg-center">
 
-    <div style="flex: 1; min-width: 65%;">
-        <video width="100%" height="350" controls autoplay muted loop style="border-radius: 25px; object-fit: cover; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
-            <source src="../Studio Gym Dance/videos e imagenes/v1c044g50000d7t7gpnog65p5kgt4fmg.mp4" type="video/mp4">
-        </video>
-    </div>
-  </div>
-</section>
+                <a class="nav-link" href="index.php">
+                    Inicio
+                </a>
 
+                <?php if (isset($_SESSION["id_alumno"])) { ?>
 
-<section style="padding: 50px 60px; background: #f8f4ef;">
-    <h2 style="font-family: Anton , sans-serif ; font-size: 28px; margin-bottom: 25px; color: #111; text-transform: uppercase;">
-        DISCIPLINAS
-    </h2>
+                    <a
+                        class="nav-link nav-destacado"
+                        href="panel_alumno.php"
+                    >
+                        Mi panel
+                    </a>
 
-    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 22px;">
+                <?php } else { ?>
 
-    <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
+                    <a
+                        class="nav-link nav-destacado"
+                        href="alumnos.php"
+                    >
+                        Alumnos
+                    </a>
 
-   <div class="card-disciplina">
-    
-        <img class="img-disciplina"
-             src="<?php echo $fila['imagen_url']; ?>">
+                <?php } ?>
 
-         <div class="info-disciplina">
-            <h3><?php echo $fila['nombrecategoria']; ?></h3>
-                       
-            <p>
-               <?php echo $fila['descripcion']; ?>
-            </p>
+                <a
+                    class="nav-link"
+                    href="disciplinas_panel.php"
+                >
+                    Disciplinas y horarios
+                </a>
+
+                <a
+                    class="nav-link"
+                    href="profesores.php"
+                >
+                    Profesores
+                </a>
+
+                <a
+                    class="nav-link nav-destacado"
+                    href="tienda.php"
+                >
+                    Tienda
+                </a>
+
+                <?php if (isset($_SESSION["nombre_alumno"])) { ?>
+
+                    <span class="usuario-navbar ms-lg-3 my-2 my-lg-0">
+
+                        <i class="bi bi-person-circle"></i>
+
+                        <?php echo htmlspecialchars(
+                            $_SESSION["nombre_alumno"] . " " .
+                            $_SESSION["apellido_alumno"]
+                        ); ?>
+
+                    </span>
+
+                    <a
+                        href="cerrar_sesion.php"
+                        class="btn-sesion ms-lg-3"
+                    >
+                        Cerrar sesión
+                    </a>
+
+                <?php } ?>
+
+            </div>
+
         </div>
-     </div>
 
-<?php  } ?>
+    </div>
+</nav>
 
-</div>
+<section class="hero-disciplinas">
 
-<?php if(isset($_GET['ver_horarios'])) { ?>
+    <div class="hero-contenido">
 
+        <div class="hero-texto">
 
-<div class="modal-horarios" id="calendario">
-     <div class="contenido-modal calendario-modal">
+            <p class="hero-etiqueta">
+                Nuestras disciplinas
+            </p>
 
-     <a href="disciplinas_panel.php" class="cerrar-modal">x</a>
+            <h1 class="hero-titulo">
+                MOVETE.<br>
+                EXPRESÁ.<br>
 
-     <h2 class="titulo">Horarios y Clases Disponibles</h2>
-     <p class="subtitulo-modal">Calendario semanal del estudio</p>
+                <span>
+                    VIVÍ.
+                </span>
+            </h1>
 
-     <div class="calendarios">
-        
-        <div class="celda encabezado">Hora</div>
-        <div class="celda encabezado">Lunes</div>
-        <div class="celda encabezado">Martes</div>
-        <div class="celda encabezado">Miercoles</div>
-        <div class="celda encabezado">Jueves</div>
-        <div class="celda encabezado">Viernes</div>
-        <div class="celda encabezado">Sabado</div>
+            <p class="hero-descripcion">
+                Explorá todas nuestras disciplinas, conocé los horarios
+                disponibles y elegí las clases que más se adapten a vos.
+            </p>
 
-        <div class="celda hora">16:00</div>
-        <div class="celda clase clasica" onclick="seleccionarClase(1,this)">Danza Clasica<br><span>Kids . Sala 1</span></div>
-        <div class="celda vacia"></div>
-        <div class="celda clase clasica" onclick="seleccionarClase(2,this)">Danza Clasica<br><span>Kids . Sala 1</span></div>
-        <div class="celda vacia"></div>
-        <div class="celda vacia"></div>
-        <div class="celda clase arabe" onclick="seleccionarClase(3,this)">Arabe <br><span>Kids . Sala 2</span></div>
+            <a
+                href="disciplinas_panel.php?ver_horarios=1#calendario"
+                class="btn-horarios"
+            >
 
-        <div class="celda hora">17:00</div>
-        <div class="celda clase tap" onclick="seleccionarClase(4,this)">Tap <br><span>Kids . Sala 1</span></div>
-        <div class="celda clase latinos"onclick="seleccionarClase(5,this)" >Ritmos Latinos <br><span>Kids . Sala 2</span></div>
-        <div class="celda clase tap" onclick="seleccionarClase(6,this)">Tap <br><span>Kids . Sala 1</span></div>
-        <div class="celda vacia"></div>
-        <div class="celda clase reggaeton" onclick="seleccionarClase(7,this)">Reggaeton <br><span>Kids . Sala 2</span></div>
-        <div class="celda clase arabe" onclick="seleccionarClase(26,this)">Arabe <br><span>Juveniles . Sala 2</span></div>
+                <i class="bi bi-calendar3"></i>
 
-        <div class="celda hora">18:00</div>
-        <div class="celda clase urbano" onclick="seleccionarClase(8,this)">Urbano <br><span>Juveniles . Sala 2</span></div>
-        <div class="celda clase clasica" onclick="seleccionarClase(9,this)">Danza Clasica <br><span>Juveniles . Sala 1</span></div>
-        <div class="celda clase urbano" onclick="seleccionarClase(10,this)">Urbano <br><span>Juveniles . Sala 2</span></div>
-        <div class="celda clase tap" onclick="seleccionarClase(11,this)">Tap <br><span>Juveniles . Sala 1</span></div>
-        <div class="celda clase clasica" onclick="seleccionarClase(12,this)">Danza Clasica <br><span>Juveniles . Sala 1</span></div>
-        <div class="celda vacia"></div>
+                Ver horarios
 
-        <div class="celda hora">19:00</div>
-        <div class="celda vacia"></div>
-        <div class="celda clase femme" onclick="seleccionarClase(13,this)">Femme <br><span>Juveniles . sala 2</span></div>
-        <div class="celda clase arabe" onclick="seleccionarClase(14,this)">Arabe <br><span>Adultos . Sala 2</span></div>
-        <div class="celda clase urbano" onclick="seleccionarClase(15,this)">Urbano <br><span>Juveniles . Sala 2</span></div>
-        <div class="celda vacia"></div>
-        <div class="celda vacia"></div>
+            </a>
 
-        <div class="celda hora">20:00</div>
-        <div class="celda clase latinos" onclick="seleccionarClase(16,this)">Ritmos Latinos <br><span>Adultos . Sala 2</span></div>
-        <div class="celda clase contemporaneo" onclick="seleccionarClase(17,this)">Contemporaneo <br><span>Adultos . Sala 1</span></div>
-        <div class="celda clase latinos" onclick="seleccionarClase(18,this)">Ritmos Latinos <br><span>Adultos . Sala 2</span></div>
-        <div class="celda clase clasica" onclick="seleccionarClase(19,this)">Danza Clasica <br><span>Adultos . Sala 1</span></div>
-        <div class="celda clase femme" onclick="seleccionarClase(20,this)">Femme <br><span>Adultos . Sala 2</span></div>
-        <div class="celda vacia"></div>
+        </div>
 
-        <div class="celda hora">21:00</div>
-        <div class="celda clase urbano"  onclick="seleccionarClase(21,this)">Urbano <br><span>Adultos . Sala 2</span> </div>
-        <div class="celda clase reggaeton"  onclick="seleccionarClase(22,this)">Reggaeton <br><span>Adultos . Sala 2</span></div>
-        <div class="celda clase heels" onclick="seleccionarClase(23,this)" >Heels <br><span>Adultos . Sala 1</span></div>
-        <div class="celda clase reggaeton"  onclick="seleccionarClase(24,this)">Reggaeton <br><span>Adultos . Sala 2</span></div>
-        <div class="celda clase heels"  onclick="seleccionarClase(25,this)">Heels <br><span>Adultos . Sala 1</span></div>
-        <div class="celda vacia"></div>
-        
-     </div>
+        <div class="hero-video-contenedor">
 
-     <form action="inscribirse.php" method="POST" onsubmit="return inscribirme()">
-        <input type="hidden" name="clases" id="clases">
-        <button type="submit">Inscribirme</button>
-     </form>
-       
-     
+            <video
+                class="hero-video"
+                controls
+                autoplay
+                muted
+                loop
+            >
 
-     
+                <source
+                    src="../Studio Gym Dance/videos e imagenes/v1c044g50000d7t7gpnog65p5kgt4fmg.mp4"
+                    type="video/mp4"
+                >
 
-     </div>
-</div>
+                Tu navegador no puede reproducir el video.
 
-<?php  } ?>
+            </video>
 
+            <div class="video-etiqueta">
 
+                <i class="bi bi-play-circle-fill"></i>
 
+                Viví la experiencia Studio Gym Dance
 
+            </div>
 
+        </div>
+
+    </div>
 
 </section>
 
+<!-- DISCIPLINAS -->
 
+<section class="seccion-disciplinas">
 
+    <div class="contenedor-disciplinas">
 
+        <div class="encabezado-disciplinas">
 
+            <div>
 
+                <small>
+                    ENCONTRÁ TU ESTILO
+                </small>
 
+                <h2>
+                    Nuestras
+                    <span>disciplinas</span>
+                </h2>
 
+            </div>
 
+            <p>
+                Tenemos propuestas para diferentes edades, niveles y estilos.
+                Descubrí la disciplina que mejor representa tu forma de bailar.
+            </p>
 
+        </div>
 
+        <div class="grilla-disciplinas">
 
- <footer class="py-4 text-center" style="background-color: #F4C9D6; color: black;">
-  <P>Contacto y Redes Sociales</P>
-     <div class="social-icons">
-      <a href="" class="btn btn" style="color: black;">
-         <i class="bi bi-instagram"></i> Instragram
-     </a>
-     <a href="" class="btn btn" style="color:black;">
-      <i class="bi bi-whatsapp"></i> Whatsapp
-     </a>
-     </div>
-     <div class=" color black">
-       © 2026 Studio Gym Danza - Todos los derechos reservados
-     </div>
+            <?php while($fila = mysqli_fetch_assoc($resultado)){ ?>
+
+                <?php
+                $nombreCategoria = "Disciplina";
+
+                if(isset($fila['nombre_categoria'])){
+                    $nombreCategoria = $fila['nombre_categoria'];
+                }elseif(isset($fila['nombrecategoria'])){
+                    $nombreCategoria = $fila['nombrecategoria'];
+                }elseif(isset($fila['nombre_disciplina'])){
+                    $nombreCategoria = $fila['nombre_disciplina'];
+                }
+                ?>
+
+                <article class="card-disciplina">
+
+                    <div class="contenedor-img-disciplina">
+
+                        <img
+                            class="img-disciplina"
+                            src="<?= htmlspecialchars($fila['imagen_url']); ?>"
+                            alt="<?= htmlspecialchars($nombreCategoria); ?>"
+                        >
+
+                    </div>
+
+                    <div class="info-disciplina">
+
+                        <span class="tag-disciplina">
+                            Studio Gym Dance
+                        </span>
+
+                        <h3>
+                            <?= htmlspecialchars($nombreCategoria); ?>
+                        </h3>
+
+                        <p>
+                            <?= htmlspecialchars($fila['descripcion']); ?>
+                        </p>
+
+                    </div>
+
+                </article>
+
+            <?php } ?>
+
+        </div>
+
+    </div>
+
+    <?php if(isset($_GET['ver_horarios'])){ ?>
+
+        <!-- CALENDARIO VIEJO -->
+
+        <div
+            class="modal-horarios"
+            id="calendario"
+        >
+
+            <div class="contenido-modal calendario-modal">
+
+                <a
+                    href="disciplinas_panel.php"
+                    class="cerrar-modal"
+                    aria-label="Cerrar"
+                >
+                    ×
+                </a>
+
+                <h2 class="titulo">
+                    Horarios y Clases Disponibles
+                </h2>
+
+                <p class="subtitulo-modal">
+                    Calendario semanal del estudio
+                </p>
+
+                <div class="calendarios">
+
+                    <div class="celda encabezado">
+                        Hora
+                    </div>
+
+                    <div class="celda encabezado">
+                        Lunes
+                    </div>
+
+                    <div class="celda encabezado">
+                        Martes
+                    </div>
+
+                    <div class="celda encabezado">
+                        Miércoles
+                    </div>
+
+                    <div class="celda encabezado">
+                        Jueves
+                    </div>
+
+                    <div class="celda encabezado">
+                        Viernes
+                    </div>
+
+                    <div class="celda encabezado">
+                        Sábado
+                    </div>
+
+                    <!-- 16:00 -->
+
+                    <div class="celda hora">
+                        16:00
+                    </div>
+
+                    <div
+                        class="celda clase clasica"
+                        onclick="seleccionarClase(1,this)"
+                    >
+                        Danza Clásica
+                        <br>
+                        <span>Kids · Sala 1</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <div
+                        class="celda clase clasica"
+                        onclick="seleccionarClase(2,this)"
+                    >
+                        Danza Clásica
+                        <br>
+                        <span>Kids · Sala 1</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <div class="celda vacia"></div>
+
+                    <div
+                        class="celda clase arabe"
+                        onclick="seleccionarClase(3,this)"
+                    >
+                        Árabe
+                        <br>
+                        <span>Kids · Sala 2</span>
+                    </div>
+
+                    <!-- 17:00 -->
+
+                    <div class="celda hora">
+                        17:00
+                    </div>
+
+                    <div
+                        class="celda clase tap"
+                        onclick="seleccionarClase(4,this)"
+                    >
+                        Tap
+                        <br>
+                        <span>Kids · Sala 1</span>
+                    </div>
+
+                    <div
+                        class="celda clase latinos"
+                        onclick="seleccionarClase(5,this)"
+                    >
+                        Ritmos Latinos
+                        <br>
+                        <span>Kids · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase tap"
+                        onclick="seleccionarClase(6,this)"
+                    >
+                        Tap
+                        <br>
+                        <span>Kids · Sala 1</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <div
+                        class="celda clase reggaeton"
+                        onclick="seleccionarClase(7,this)"
+                    >
+                        Reggaetón
+                        <br>
+                        <span>Kids · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase arabe"
+                        onclick="seleccionarClase(26,this)"
+                    >
+                        Árabe
+                        <br>
+                        <span>Juveniles · Sala 2</span>
+                    </div>
+
+                    <!-- 18:00 -->
+
+                    <div class="celda hora">
+                        18:00
+                    </div>
+
+                    <div
+                        class="celda clase urbano"
+                        onclick="seleccionarClase(8,this)"
+                    >
+                        Urbano
+                        <br>
+                        <span>Juveniles · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase clasica"
+                        onclick="seleccionarClase(9,this)"
+                    >
+                        Danza Clásica
+                        <br>
+                        <span>Juveniles · Sala 1</span>
+                    </div>
+
+                    <div
+                        class="celda clase urbano"
+                        onclick="seleccionarClase(10,this)"
+                    >
+                        Urbano
+                        <br>
+                        <span>Juveniles · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase tap"
+                        onclick="seleccionarClase(11,this)"
+                    >
+                        Tap
+                        <br>
+                        <span>Juveniles · Sala 1</span>
+                    </div>
+
+                    <div
+                        class="celda clase clasica"
+                        onclick="seleccionarClase(12,this)"
+                    >
+                        Danza Clásica
+                        <br>
+                        <span>Juveniles · Sala 1</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <!-- 19:00 -->
+
+                    <div class="celda hora">
+                        19:00
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <div
+                        class="celda clase femme"
+                        onclick="seleccionarClase(13,this)"
+                    >
+                        Femme
+                        <br>
+                        <span>Juveniles · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase arabe"
+                        onclick="seleccionarClase(14,this)"
+                    >
+                        Árabe
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase urbano"
+                        onclick="seleccionarClase(15,this)"
+                    >
+                        Urbano
+                        <br>
+                        <span>Juveniles · Sala 2</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <div class="celda vacia"></div>
+
+                    <!-- 20:00 -->
+
+                    <div class="celda hora">
+                        20:00
+                    </div>
+
+                    <div
+                        class="celda clase latinos"
+                        onclick="seleccionarClase(16,this)"
+                    >
+                        Ritmos Latinos
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase contemporaneo"
+                        onclick="seleccionarClase(17,this)"
+                    >
+                        Contemporáneo
+                        <br>
+                        <span>Adultos · Sala 1</span>
+                    </div>
+
+                    <div
+                        class="celda clase latinos"
+                        onclick="seleccionarClase(18,this)"
+                    >
+                        Ritmos Latinos
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase clasica"
+                        onclick="seleccionarClase(19,this)"
+                    >
+                        Danza Clásica
+                        <br>
+                        <span>Adultos · Sala 1</span>
+                    </div>
+
+                    <div
+                        class="celda clase femme"
+                        onclick="seleccionarClase(20,this)"
+                    >
+                        Femme
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                    <!-- 21:00 -->
+
+                    <div class="celda hora">
+                        21:00
+                    </div>
+
+                    <div
+                        class="celda clase urbano"
+                        onclick="seleccionarClase(21,this)"
+                    >
+                        Urbano
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase reggaeton"
+                        onclick="seleccionarClase(22,this)"
+                    >
+                        Reggaetón
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase heels"
+                        onclick="seleccionarClase(23,this)"
+                    >
+                        Heels
+                        <br>
+                        <span>Adultos · Sala 1</span>
+                    </div>
+
+                    <div
+                        class="celda clase reggaeton"
+                        onclick="seleccionarClase(24,this)"
+                    >
+                        Reggaetón
+                        <br>
+                        <span>Adultos · Sala 2</span>
+                    </div>
+
+                    <div
+                        class="celda clase heels"
+                        onclick="seleccionarClase(25,this)"
+                    >
+                        Heels
+                        <br>
+                        <span>Adultos · Sala 1</span>
+                    </div>
+
+                    <div class="celda vacia"></div>
+
+                </div>
+
+                <div class="zona-inscripcion">
+
+                    <?php if(isset($_SESSION['id_alumno'])){ ?>
+
+                        <form
+                            action="inscribirse.php"
+                            method="POST"
+                            onsubmit="return prepararInscripcion()"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="clases"
+                                id="clases"
+                            >
+
+                            <button
+                                type="submit"
+                                class="btn-inscribirse"
+                            >
+                                Inscribirme
+                            </button>
+
+                        </form>
+
+                    <?php }else{ ?>
+
+                        <button
+                            type="button"
+                            class="btn-inscribirse"
+                            onclick="mostrarMensajeSesion()"
+                        >
+                            Inscribirme
+                        </button>
+
+                    <?php } ?>
+
+                    <p class="texto-seleccion">
+                        Seleccioná una o más clases antes de inscribirte.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    <?php } ?>
+
+</section>
+
+<!-- MENSAJE PARA PERSONAS SIN SESIÓN -->
+
+<div
+    class="mensaje-fondo"
+    id="mensajeSesion"
+>
+
+    <div class="mensaje-caja">
+
+        <div class="mensaje-header">
+
+            <h3>
+                Iniciar sesión
+            </h3>
+
+            <button
+                type="button"
+                class="cerrar-mensaje"
+                onclick="cerrarMensajeSesion()"
+                aria-label="Cerrar mensaje"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="mensaje-contenido">
+
+            <div class="icono-mensaje">
+
+                <i class="bi bi-person-lock"></i>
+
+            </div>
+
+            <h4>
+                Necesitás iniciar sesión
+            </h4>
+
+            <p>
+                Para inscribirte en una clase primero tenés que
+                ingresar con tu cuenta de alumno. Si todavía no
+                tenés una cuenta, también podés registrarte.
+            </p>
+
+        </div>
+
+        <div class="mensaje-botones">
+
+            <a
+                href="alumnos.php"
+                class="btn-iniciar-sesion"
+            >
+
+                <i class="bi bi-box-arrow-in-right"></i>
+
+                Iniciar sesión
+
+            </a>
+
+            <button
+                type="button"
+                class="btn-seguir-viendo"
+                onclick="cerrarMensajeSesion()"
+            >
+                Seguir viendo
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer class="footer-pagina">
+
+    <h3>
+        Studio Gym Dance
+    </h3>
+
+    <p>
+        Contactanos y seguinos en nuestras redes sociales.
+    </p>
+
+    <div class="footer-redes">
+
+        <a href="#">
+
+            <i class="bi bi-instagram"></i>
+
+            Instagram
+
+        </a>
+
+        <a href="#">
+
+            <i class="bi bi-whatsapp"></i>
+
+            WhatsApp
+
+        </a>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 Studio Gym Dance — Todos los derechos reservados.
+    </div>
+
 </footer>
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+
     var clasesSeleccionadas = [];
 
-    function seleccionarClase(idClase, elemento) {
-      
-        
-    if(clasesSeleccionadas.indexOf(idClase) !== -1){ 
+    function seleccionarClase(idClase, elemento){
 
-        clasesSeleccionadas = clasesSeleccionadas.filter(function(id){ 
-            return id != idClase;
+        var posicion = clasesSeleccionadas.indexOf(idClase);
 
-        });
+        if(posicion !== -1){
 
-         elemento.style.background = "";
+            clasesSeleccionadas.splice(posicion, 1);
 
-    }else{
+            elemento.classList.remove("seleccionada");
 
-        clasesSeleccionadas.push(idClase);
-        
-        elemento.style.background = "green";
+        }else{
 
-     }
+            clasesSeleccionadas.push(idClase);
 
-     console.log(clasesSeleccionadas);
-}
+            elemento.classList.add("seleccionada");
+        }
+    }
 
-function inscribirme(){
     
-     if(clasesSeleccionadas.length == 0){
-     alert("Selecciona al menos una clase");
-     return false;
-   }
+    function prepararInscripcion(){
 
-   document.getElementById("clases").value = clasesSeleccionadas;
-    
-   return true;
-}
-    
+        if(clasesSeleccionadas.length === 0){
+
+            alert("Seleccioná al menos una clase.");
+
+            return false;
+        }
+
+        var campoClases = document.getElementById("clases");
+
+        if(!campoClases){
+
+            alert("No se pudieron preparar las clases seleccionadas.");
+
+            return false;
+        }
+
+        campoClases.value = clasesSeleccionadas.join(",");
+
+        return true;
+    }
+
+    /*
+     * Mostrar mensaje cuando no hay una sesión de alumno.
+     */
+    function mostrarMensajeSesion(){
+
+        var mensaje = document.getElementById("mensajeSesion");
+
+        if(mensaje){
+
+            mensaje.classList.add("visible");
+
+        }else{
+
+            alert(
+                "Para inscribirte primero tenés que iniciar sesión como alumno."
+            );
+        }
+    }
+
+   
+    function cerrarMensajeSesion(){
+
+        var mensaje = document.getElementById("mensajeSesion");
+
+        if(mensaje){
+
+            mensaje.classList.remove("visible");
+        }
+    }
+
+
+    document.addEventListener("click", function(event){
+
+        var mensaje = document.getElementById("mensajeSesion");
+
+        if(
+            mensaje &&
+            event.target === mensaje
+        ){
+
+            cerrarMensajeSesion();
+        }
+    });
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

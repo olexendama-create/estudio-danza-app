@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include("conexion.php");
 
 $tabla = $_POST['tabla'];
@@ -32,7 +35,8 @@ mysqli_query($conexion,$sql);
 header("Location:alumnos_abm.php");
 exit();
 
-
+} else {
+    echo "Error al actualizar: " . mysqli_error($conexion);
 }
 
 if($tabla == "profesores") { 
@@ -247,6 +251,61 @@ if($tabla=="categorias_disciplinas"){
     exit();
 }
 
+else if($tabla == "ventas"){
+
+    $id_venta = $_POST['id_venta'];
+    $id_alumno = $_POST['id_alumno'];
+    $fecha_venta = str_replace("T", " ", $_POST['fecha_venta']);
+    $metodo_pago = $_POST['metodo_pago'];
+
+    $sql = "UPDATE ventas
+            SET id_alumno='$id_alumno',
+                fecha_venta='$fecha_venta',
+                metodo_pago='$metodo_pago'
+            WHERE id_venta='$id_venta'";
+
+    $resultado = mysqli_query($conexion, $sql);
+
+    if(!$resultado){
+        die("Error al actualizar venta: " . mysqli_error($conexion));
+    }
+
+    header("Location: ventas_abm.php");
+    exit();
+}
+
+
+else if($tabla == "carrito"){
+
+    $id_carrito = $_POST['id_carrito'];
+    $id_alumno = $_POST['id_alumno'];
+    $fecha = str_replace("T", " ", $_POST['fecha']);
+    $estado = $_POST['estado'];
+
+    if(
+        empty($id_carrito) ||
+        empty($id_alumno) ||
+        empty($fecha) ||
+        empty($estado)
+    ){
+        die("Faltan datos para actualizar el carrito");
+    }
+
+    $sql = "UPDATE carrito
+            SET id_alumno='$id_alumno',
+                fecha='$fecha',
+                estado='$estado'
+            WHERE id_carrito='$id_carrito'";
+
+    $resultado = mysqli_query($conexion, $sql);
+
+    if(!$resultado){
+        die("Error al actualizar carrito: " . mysqli_error($conexion));
+    }
+
+    header("Location: carrito_abm.php");
+    exit();
+}
 
 
 

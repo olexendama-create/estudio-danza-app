@@ -8,10 +8,11 @@ if(!isset($_SESSION['id_alumno'])){
 }
 
 $id_alumno = $_SESSION['id_alumno'];
+$metodo_pago = $_POST['metodo_pago'];
 
-$sqlCarrito = "SELECT id_carrito 
-               FROM carrito 
-               WHERE id_alumno = '$id_alumno' 
+$sqlCarrito = "SELECT id_carrito
+               FROM carrito
+               WHERE id_alumno = '$id_alumno'
                AND estado = 'pendiente'";
 
 $resCarrito = mysqli_query($conexion, $sqlCarrito);
@@ -26,7 +27,8 @@ $id_carrito = $carrito['id_carrito'];
 
 $sqlItems = "SELECT cd.*, p.stock, p.nombre_producto
              FROM carrito_detalle cd
-             INNER JOIN productos p ON cd.id_producto = p.id_producto
+             INNER JOIN productos p
+             ON cd.id_producto = p.id_producto
              WHERE cd.id_carrito = '$id_carrito'";
 
 $resItems = mysqli_query($conexion, $sqlItems);
@@ -39,18 +41,26 @@ if(mysqli_num_rows($resItems) == 0){
 $items = [];
 
 while($item = mysqli_fetch_assoc($resItems)){
+
     if($item['cantidad'] > $item['stock']){
-        echo "No hay stock suficiente para: " . $item['nombre_producto'];
+        echo "No hay stock suficiente para: "
+             . $item['nombre_producto'];
         exit();
     }
 
     $items[] = $item;
 }
 
-$sqlVenta = "INSERT INTO ventas (id_alumno, fecha_venta)
-             VALUES ('$id_alumno', NOW())";
+$sqlVenta = "INSERT INTO ventas
+             (id_alumno, fecha_venta, metodo_pago)
+             VALUES
+             ('$id_alumno', NOW(), '$metodo_pago')";
 
-mysqli_query($conexion, $sqlVenta);
+if(!mysqli_query($conexion, $sqlVenta)){
+    echo "Error al crear la venta: "
+         . mysqli_error($conexion);
+    exit();
+}
 
 $id_venta = mysqli_insert_id($conexion);
 
@@ -61,9 +71,19 @@ foreach($items as $item){
     $precio = $item['precio_unitario'];
 
     $sqlDetalle = "INSERT INTO detalle_ventas
-                   (id_venta, id_producto, cantidad, precio_unitario)
+                   (
+                       id_venta,
+                       id_producto,
+                       cantidad,
+                       precio_unitario
+                   )
                    VALUES
-                   ('$id_venta', '$id_producto', '$cantidad', '$precio')";
+                   (
+                       '$id_venta',
+                       '$id_producto',
+                       '$cantidad',
+                       '$precio'
+                   )";
 
     mysqli_query($conexion, $sqlDetalle);
 
@@ -80,6 +100,6 @@ $sqlEstado = "UPDATE carrito
 
 mysqli_query($conexion, $sqlEstado);
 
-header("Location: compra_exitosa.php");
+header("Location: pago_exitoso.php?tipo=tienda");
 exit();
 ?>

@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include("conexion.php");
 
 $id = $_GET['id'];
@@ -7,14 +10,78 @@ $tabla = $_GET['tabla'];
 
 if($tabla == "alumnos"){
 
-$sql = "DELETE FROM alumnos
-        WHERE id_alumno='$id'";
+    /* Primero buscamos los carritos del alumno */
+    $sql_buscar_carritos = "SELECT id_carrito
+                            FROM carrito
+                            WHERE id_alumno='$id'";
 
-mysqli_query($conexion,$sql);
+    $resultado_carritos = mysqli_query(
+        $conexion,
+        $sql_buscar_carritos
+    );
 
-header("Location:alumnos_abm.php");
-exit();
+    if(!$resultado_carritos){
+        die(
+            "Error al buscar carritos: "
+            . mysqli_error($conexion)
+        );
+    }
 
+    /* Eliminamos los detalles de cada carrito */
+    while($carrito = mysqli_fetch_assoc($resultado_carritos)){
+
+        $id_carrito = $carrito['id_carrito'];
+
+        $sql_detalle = "DELETE FROM carrito_detalle
+                        WHERE id_carrito='$id_carrito'";
+
+        $resultado_detalle = mysqli_query(
+            $conexion,
+            $sql_detalle
+        );
+
+        if(!$resultado_detalle){
+            die(
+                "Error al eliminar detalles del carrito: "
+                . mysqli_error($conexion)
+            );
+        }
+    }
+
+    /* Eliminamos los carritos del alumno */
+    $sql_carrito = "DELETE FROM carrito
+                    WHERE id_alumno='$id'";
+
+    $resultado_carrito = mysqli_query(
+        $conexion,
+        $sql_carrito
+    );
+
+    if(!$resultado_carrito){
+        die(
+            "Error al eliminar carrito: "
+            . mysqli_error($conexion)
+        );
+    }
+
+    /* Finalmente eliminamos al alumno */
+    $sql_alumno = "DELETE FROM alumnos
+                   WHERE id_alumno='$id'";
+
+    $resultado_alumno = mysqli_query(
+        $conexion,
+        $sql_alumno
+    );
+
+    if(!$resultado_alumno){
+        die(
+            "Error al eliminar alumno: "
+            . mysqli_error($conexion)
+        );
+    }
+
+    header("Location: alumnos_abm.php");
+    exit();
 }
 
 if($tabla == "profesores"){
@@ -144,12 +211,68 @@ if($tabla=="categorias_disciplinas"){
 }
 
 
+else if($tabla == "ventas"){
 
+    /* Primero eliminamos los detalles de la venta */
+    $sql_detalles = "DELETE FROM detalle_ventas
+                     WHERE id_venta='$id'";
 
+    $resultado_detalles = mysqli_query($conexion, $sql_detalles);
 
+    if(!$resultado_detalles){
+        die(
+            "Error al eliminar los detalles de la venta: "
+            . mysqli_error($conexion)
+        );
+    }
 
+    /* Después eliminamos la venta */
+    $sql_venta = "DELETE FROM ventas
+                  WHERE id_venta='$id'";
 
+    $resultado_venta = mysqli_query($conexion, $sql_venta);
 
+    if(!$resultado_venta){
+        die(
+            "Error al eliminar la venta: "
+            . mysqli_error($conexion)
+        );
+    }
 
+    header("Location: ventas_abm.php");
+    exit();
+}
+
+else if($tabla == "carrito"){
+
+    /* Primero eliminamos los detalles del carrito */
+    $sql_detalle = "DELETE FROM carrito_detalle
+                    WHERE id_carrito='$id'";
+
+    $resultado_detalle = mysqli_query($conexion, $sql_detalle);
+
+    if(!$resultado_detalle){
+        die(
+            "Error al eliminar los detalles del carrito: "
+            . mysqli_error($conexion)
+        );
+    }
+
+    /* Después eliminamos el carrito */
+    $sql_carrito = "DELETE FROM carrito
+                    WHERE id_carrito='$id'";
+
+    $resultado_carrito = mysqli_query($conexion, $sql_carrito);
+
+    if(!$resultado_carrito){
+        die(
+            "Error al eliminar el carrito: "
+            . mysqli_error($conexion)
+        );
+    }
+
+    header("Location: carrito_abm.php");
+    exit();
+}
 
 ?>
